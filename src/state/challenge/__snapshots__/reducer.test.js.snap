@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the challenge reducer should push new challenges to the list 1`] = `
+Object {
+  "list": Array [
+    Object {
+      "duration": 1000,
+      "name": "minimap",
+      "time": undefined,
+    },
+    Object {
+      "duration": 2000,
+      "name": "glove",
+      "time": undefined,
+    },
+  ],
+}
+`;
+
+exports[`the challenge reducer should start with an empty list 1`] = `
+Object {
+  "list": Array [],
+}
+`;

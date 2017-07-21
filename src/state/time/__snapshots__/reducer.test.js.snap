@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should pause the timer 1`] = `
+Object {
+  "running": true,
+}
+`;
+
+exports[`should reset the time 1`] = `
+Object {
+  "time": 0,
+}
+`;
+
+exports[`should resume the timer 1`] = `
+Object {
+  "running": true,
+}
+`;
+
+exports[`should set the time 1`] = `
+Object {
+  "time": 2,
+}
+`;

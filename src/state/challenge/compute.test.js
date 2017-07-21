@@ -1,0 +1,134 @@
+import {
+    calculateActive,
+    getRemaining,
+    groupChallenges
+} from './compute.js';
+
+xdescribe('active challenges', () => {
+    it('should find a single challenge', () =>{
+        const list = [
+            {
+                name: 'minimap',
+                duration: 1000,
+                time: 1000
+            }
+        ];
+
+        expect(calculateActive(list, 1000)).toEqual(list);
+        expect(calculateActive(list, 1500)).toEqual(list);
+        expect(calculateActive(list, 2000)).toEqual(list);
+    });
+
+    it('should filter an inactive challenge', () => {
+        const list = [
+            {
+                name: 'minimap',
+                duration: 1000,
+                time: 1000
+            }
+        ];
+
+        expect(calculateActive(list, 999)).toEqual([]);
+        expect(calculateActive(list, 2001)).toEqual([]);
+        expect(calculateActive(list, 2500)).toEqual([]);
+    });
+});
+
+describe('challenge grouping', () => {
+    it('should does nothing to an empty array', () => {
+        expect(groupChallenges([])).toEqual({});
+    });
+
+    it('should group challenges by name', () => {
+        expect(groupChallenges([{
+            name: 'minimap',
+            duration: 10,
+        }])).toEqual({
+            minimap: [{
+                name: 'minimap',
+                duration: 10
+            }]
+        });
+    });
+});
+
+xdescribe('remaining challenges', () => {
+    it('should calculate a single challenge', () => {
+        const list = [
+            {
+                name: 'glove',
+                duration: 10,
+                time: 1
+            }
+        ];
+
+        const now = 3;
+        const active = calculateActive(list, now);
+        const result = getRemaining(active, now);
+
+        expect(result).toEqual({
+            glove: {
+                remaining: 8,
+                until: 11
+            }
+        });
+    });
+
+    it('should handle two challenges', () => {
+        const list = [
+            {
+                name: 'glove',
+                duration: 10,
+                time: 5
+            },
+            {
+                name: 'glove',
+                duration: 10,
+                time: 20
+            }
+        ];
+
+        const now = 25;
+        const active = calculateActive(list, now);
+        const result = getRemaining(active, now);
+
+        expect(result).toEqual({
+            glove: {
+                remaining: 5,
+                until: 30
+            }
+        });
+    });
+
+    it('should be empty if all challenges have passed', () => {
+        const list = [
+            {
+                name: 'glove',
+                duration: 10,
+                time: 5
+            },
+            {
+                name: 'glove',
+                duration: 10,
+                time: 20
+            },
+            {
+                name: 'glove',
+                duration: 10,
+                time: 40
+            }
+        ];
+
+        const now = 51;
+        const active = calculateActive(list, now);
+        const result = getRemaining(active, now);
+
+        expect(result).toEqual({
+            glove: {
+                remaining: 0,
+                until: undefined
+            }
+        });
+    });
+});
+
