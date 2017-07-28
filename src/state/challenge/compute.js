@@ -3,8 +3,8 @@ export const calculateRemaining = (challenges, now) => {
     let until;
     for (const item of challenges) {
         const remaining = (item.duration + item.time) - now;
-        if (remaining <= 0) {
-            assert(false); // only active challenges should be passed
+        if (remaining < 0) {
+            throw new Error('inactive challenge'); // only active challenges should be passed
         } else {
             sumRemaining += remaining;
             if ( until ) {
@@ -50,14 +50,4 @@ export const groupChallenges = list => {
         },
         groups
     );
-};
-
-export const getRemaining = (list, now) => {
-    const challengesObject = groupChallenges(list);
-
-    const remaining = {};
-    for( const [ key, value ] of Object.entries(challengesObject)) {
-        remaining[key] = calculateRemaining(value, now);
-    }
-    return remaining;
 };

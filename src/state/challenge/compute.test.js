@@ -1,10 +1,10 @@
 import {
     calculateActive,
-    getRemaining,
+    calculateRemaining,
     groupChallenges
 } from './compute.js';
 
-xdescribe('active challenges', () => {
+describe('active challenges', () => {
     it('should find a single challenge', () =>{
         const list = [
             {
@@ -52,7 +52,7 @@ describe('challenge grouping', () => {
     });
 });
 
-xdescribe('remaining challenges', () => {
+describe('remaining challenges', () => {
     it('should calculate a single challenge', () => {
         const list = [
             {
@@ -64,13 +64,11 @@ xdescribe('remaining challenges', () => {
 
         const now = 3;
         const active = calculateActive(list, now);
-        const result = getRemaining(active, now);
+        const result = calculateRemaining(active, now);
 
         expect(result).toEqual({
-            glove: {
-                remaining: 8,
-                until: 11
-            }
+            remaining: 8,
+            until: 11
         });
     });
 
@@ -90,13 +88,11 @@ xdescribe('remaining challenges', () => {
 
         const now = 25;
         const active = calculateActive(list, now);
-        const result = getRemaining(active, now);
+        const result = calculateRemaining(active, now);
 
         expect(result).toEqual({
-            glove: {
-                remaining: 5,
-                until: 30
-            }
+            remaining: 5,
+            until: 30
         });
     });
 
@@ -121,13 +117,11 @@ xdescribe('remaining challenges', () => {
 
         const now = 51;
         const active = calculateActive(list, now);
-        const result = getRemaining(active, now);
+        const result = calculateRemaining(active, now);
 
         expect(result).toEqual({
-            glove: {
-                remaining: 0,
-                until: undefined
-            }
+            remaining: 0,
+            until: undefined
         });
     });
 });

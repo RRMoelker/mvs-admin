@@ -3,6 +3,8 @@ import { createAction } from 'redux-actions';
 import { mergeChallenges } from './merger.js';
 import {
     calculateActive,
+    calculateRemaining,
+    groupChallenges,
     getRemaining
 } from './compute.js';
 
@@ -14,9 +16,17 @@ const initialState = {
 }
 
 export const selectRemaining = (list, now) => {
-    const merged = mergeChallenges(list);
-    const active = calculateActive(merged, now);
-    return getRemaining(active, now);
+    const grouped = groupChallenges(list);
+
+    const remaining = {};
+    for( const [ key, groupList ] of Object.entries(grouped)) {
+        const merged = mergeChallenges(groupList);
+        const active = calculateActive(merged, now);
+        if ( active.length ) {
+            remaining[key] = calculateRemaining(active, now);
+        }
+    }
+    return remaining;
 }
 
 export default (state = initialState, action) => {

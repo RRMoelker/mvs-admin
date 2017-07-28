@@ -16,21 +16,38 @@ import { formatTime } from './util/format.js';
 const globalTime = document.querySelector('#time');
 const activeChallenges = document.querySelector('#activeChallenges');
 const history = document.querySelector('#challengeHistory');
-const addBtn = document.querySelector('#addBtn');
+const addBtns = document.querySelectorAll('.js-add');
+const substractBtns = document.querySelectorAll('.js-substract');
 const resetBtn = document.querySelector('#resetBtn');
 const pauseBtn = document.querySelector('#pauseBtn');
 
-store.dispatch(addChallenge({
-    name: 'minimap',
-    duration: 1000
-}));
-
-addBtn.addEventListener('click', () => {
+for(let i=0; i< 3; ++i) {
     store.dispatch(addChallenge({
         name: 'minimap',
         duration: 1000
     }));
+}
+
+Array.from(addBtns).forEach( button => {
+    button.addEventListener('click', () => {
+        const name = button.dataset.type;
+        store.dispatch(addChallenge({
+            name,
+            duration: 2000
+        }));
+    });
 });
+
+Array.from(substractBtns).forEach( button => {
+    button.addEventListener('click', () => {
+        const name = button.dataset.type;
+        store.dispatch(addChallenge({
+            name,
+            duration: -2000
+        }));
+    });
+});
+
 resetBtn.addEventListener('click', () => {
     store.dispatch(resetTime());
 });
@@ -50,7 +67,7 @@ const interval = setInterval(() => {
     // if (diff > 3000) {
     //     clearInterval(interval);
     // }
-}, 50);
+}, 200);
 
 const update = (state) => {
     globalTime.innerHTML = formatTime(state.time.time);

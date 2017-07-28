@@ -109,10 +109,37 @@ describe('select remaining challenges', () => {
         const list = stateC.list;
         const result = selectRemaining(list, 51);
 
+        expect(result).toEqual({});
+    });
+
+    it('should support mixed challenges', () => {
+        const stateA = reducer(undefined, addChallenge({
+            name: 'glove',
+            duration: 10,
+            time: 0
+        }));
+        const stateB = reducer(stateA, addChallenge({
+            name: 'map',
+            duration: 10,
+            time: 15
+        }));
+        const stateC = reducer(stateB, addChallenge({
+            name: 'health',
+            duration: 10,
+            time: 18
+        }));
+
+        const list = stateC.list;
+        const result = selectRemaining(list, 19);
+
         expect(result).toEqual({
-            glove: {
-                remaining: 0,
-                until: undefined
+            map: {
+                remaining: 6,
+                until: 25
+            },
+            health: {
+                remaining: 9,
+                until: 28
             }
         });
     });
