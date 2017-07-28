@@ -7,10 +7,10 @@ const BUILD_DIR = path.resolve(PROJECT_DIR, 'dist');
 
 module.exports = {
     // context: PROJECT_DIR,
-    entry: SRC_DIR + "/index.js",
+    entry: SRC_DIR + '/index.js',
     output: {
         path: BUILD_DIR,
-        filename: "bundle.js"
+        filename: 'bundle.js'
     },
     plugins: [
         new CopyWebpackPlugin([
@@ -27,14 +27,14 @@ module.exports = {
     module: {
         rules: [
             {
-              test: /\.js$/,
-              exclude: /(node_modules|bower_components)/,
-              use: {
-                loader: 'babel-loader',
-                options: {
-                  presets: ['env']
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env']
+                    }
                 }
-              }
             }
         ]
     },
