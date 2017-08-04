@@ -1,3 +1,7 @@
+// import '@webcomponents/webcomponentsjs/webcomponents-lite.js'; // polyfill HTML Imports, Custom Elements, not shadow dom
+
+import controls from './controls.js';
+
 import moment from 'moment';
 
 import store from './state/store.js';
@@ -28,25 +32,25 @@ for(let i=0; i< 3; ++i) {
     }));
 }
 
-Array.from(addBtns).forEach( button => {
-    button.addEventListener('click', () => {
-        const name = button.dataset.type;
-        store.dispatch(addChallenge({
-            name,
-            duration: 2000
-        }));
-    });
-});
+// Array.from(addBtns).forEach( button => {
+//     button.addEventListener('click', () => {
+//         const name = button.dataset.type;
+//         store.dispatch(addChallenge({
+//             name,
+//             duration: 2000
+//         }));
+//     });
+// });
 
-Array.from(substractBtns).forEach( button => {
-    button.addEventListener('click', () => {
-        const name = button.dataset.type;
-        store.dispatch(addChallenge({
-            name,
-            duration: -2000
-        }));
-    });
-});
+// Array.from(substractBtns).forEach( button => {
+//     button.addEventListener('click', () => {
+//         const name = button.dataset.type;
+//         store.dispatch(addChallenge({
+//             name,
+//             duration: -2000
+//         }));
+//     });
+// });
 
 resetBtn.addEventListener('click', () => {
     store.dispatch(resetTime());
@@ -55,19 +59,19 @@ pauseBtn.addEventListener('click', () => {
     store.dispatch(pauseTime());
 });
 
-const timeStart = moment();
-const interval = setInterval(() => {
-    if(!store.getState().time.running) {
-        return;
-    }
-    const now = moment();
-    const diff = now.diff(timeStart); // ms
-    store.dispatch(setTime(diff));
+// const timeStart = moment();
+// const interval = setInterval(() => {
+//     if(!store.getState().time.running) {
+//         return;
+//     }
+//     const now = moment();
+//     const diff = now.diff(timeStart); // ms
+//     store.dispatch(setTime(diff));
 
-    // if (diff > 3000) {
-    //     clearInterval(interval);
-    // }
-}, 200);
+//     // if (diff > 3000) {
+//     //     clearInterval(interval);
+//     // }
+// }, 200);
 
 const update = (state) => {
     globalTime.innerHTML = formatTime(state.time.time);
@@ -90,3 +94,6 @@ store.subscribe(() => {
     const state = store.getState();
     update(state);
 });
+
+const controlsEl = document.querySelector('.js-controls');
+controlsEl.setAttribute('config', JSON.stringify(controls));

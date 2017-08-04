@@ -9,7 +9,7 @@ App: https://rrmoelker.github.io/mvs-admin/
 Building
 
 ```
-npm start
+npm run build
 ```
 
 The site is served through gh-pages.
@@ -17,12 +17,7 @@ The site is served through gh-pages.
 
 ## Development
 
-Production build
-```
-npm start
-```
-
 Development server
 ```
-npm run watch
+npm start
 ```
