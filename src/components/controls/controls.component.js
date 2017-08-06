@@ -53,4 +53,5 @@ class ControlsComponent extends HTMLElement {
     }
 }
 
+customElements.define('mvs-controls', ControlsComponent);
 export default ControlsComponent;

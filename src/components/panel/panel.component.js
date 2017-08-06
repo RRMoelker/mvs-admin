@@ -22,4 +22,4 @@ class PanelComponent extends HTMLElement {
     }
 }
 
-export default PanelComponent;
+customElements.define('mvs-panel', PanelComponent);

@@ -75,4 +75,5 @@ store.subscribe(() => {
 
 const controlsEl = document.querySelector('.js-controls');
 controlsEl.setAttribute('config', JSON.stringify(controls));
-controlsEl.setStore(store);
+const controlsContainerEl = document.querySelector('mvs-controls-container');
+controlsContainerEl.setStore(store);

@@ -1,7 +1,4 @@
-import {
-    addChallenge
-} from '../../state/challenge/reducer.js';
-// TODO proper container, do not extend
+import { addChallenge } from '../../state/challenge/reducer.js';
 
 import ControlsComponent from './controls.component.js';
 
@@ -9,13 +6,25 @@ import ControlsComponent from './controls.component.js';
 //     console.log('onAdd clicked');
 // };
 
-
-class ControlsContainer extends ControlsComponent {
+class ControlsContainer extends HTMLElement {
     constructor () {
         super();
-        this.addEventListener('add-challenge', e => {
+        this.child = new ControlsComponent();
+        this.appendChild(this.child);
+
+        this.child.addEventListener('add-challenge', e => {
             this.store.dispatch(addChallenge(e.detail));
         });
+    }
+
+    static get observedAttributes () {
+        return [
+            'config'
+        ];
+    }
+
+    attributeChangedCallback (name, oldValue, newValue) {
+        this.child.setAttribute(name, newValue);
     }
 
     setStore (store) {
@@ -23,4 +32,4 @@ class ControlsContainer extends ControlsComponent {
     }
 }
 
-customElements.define('mvs-controls', ControlsContainer);
+customElements.define('mvs-controls-container', ControlsContainer);
