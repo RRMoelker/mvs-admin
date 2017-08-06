@@ -11,14 +11,14 @@ class PanelComponent extends HTMLElement {
 
     connectedCallback () {
         // Called when the element is inserted into a document, including into a shadow tree
-        console.log(this.constructor.name, 'connected');
+        // console.log(this.constructor.name, 'connected');
 
         const nameEl = this.shadowRoot.querySelector('.js-name');
         nameEl.innerHTML = this.getAttribute('name');
     }
     disconnectedCallback () {
         // Called when the element is removed from a document
-        console.log(this.constructor.name, 'disconnected');
+        // console.log(this.constructor.name, 'disconnected');
     }
 }
 

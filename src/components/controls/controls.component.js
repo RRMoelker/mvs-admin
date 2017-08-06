@@ -11,8 +11,6 @@ class ControlsComponent extends HTMLElement {
 
     connectedCallback () {
         // Called when the element is inserted into a document, including into a shadow tree
-        // console.log('connected');
-        // this.onAdd();
     }
 
     static get observedAttributes () {
@@ -28,11 +26,9 @@ class ControlsComponent extends HTMLElement {
 
         if(name === 'config') {
             const data = JSON.parse(newValue);
-            // console.log(data);
             this.config = data;
         }
 
-        // this[name] = newValue;
         this.draw();
     }
 
@@ -46,11 +42,11 @@ class ControlsComponent extends HTMLElement {
             row.querySelector('.js-label').innerHTML = control.label;
             row.querySelector('.js-add').addEventListener('click', () => {
                 const name = control.name;
-                // store.dispatch(addChallenge({
-                //     name,
-                //     duration: 2000
-                // }));
-                console.log('clicked', name);
+                const duration = 2000;
+                this.dispatchEvent(new CustomEvent('add-challenge', {bubbles: true, composed: true, detail: {
+                    name,
+                    duration
+                }}));
             });
             rowContainerEl.appendChild(row);
         }
