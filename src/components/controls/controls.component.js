@@ -9,10 +9,6 @@ class ControlsComponent extends HTMLElement {
         this.shadowRoot.appendChild(clone);
     }
 
-    connectedCallback () {
-        // Called when the element is inserted into a document, including into a shadow tree
-    }
-
     static get observedAttributes () {
         return [
             'config'
@@ -20,10 +16,6 @@ class ControlsComponent extends HTMLElement {
     }
 
     attributeChangedCallback (name, oldValue, newValue) {
-        // Called when an attribute is changed, appended, removed,
-        // or replaced on the element. Only called for observed attributes.
-        // console.log('attributes', name, oldValue, newValue);
-
         if(name === 'config') {
             const data = JSON.parse(newValue);
             this.config = data;
@@ -37,7 +29,6 @@ class ControlsComponent extends HTMLElement {
 
         const rowContainerEl = this.shadowRoot.querySelector('.js-control-container');
         for( const control of this.config ) {
-            // console.log(control);
             const row = document.importNode(rowTemplate.content, true);
             row.querySelector('.js-label').innerHTML = control.label;
             row.querySelector('.js-add').addEventListener('click', () => {

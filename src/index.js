@@ -9,19 +9,8 @@ import {
     addChallenge
 } from './state/challenge/reducer.js';
 import {
-    resetTime,
-    setTime,
-    pauseTime
+    setTime
 } from './state/time/reducer.js';
-import { selectRemaining } from './state/challenge/reducer';
-
-import { formatTime } from './util/format.js';
-
-const globalTime = document.querySelector('#time');
-const activeChallenges = document.querySelector('#activeChallenges');
-const history = document.querySelector('#challengeHistory');
-const resetBtn = document.querySelector('#resetBtn');
-const pauseBtn = document.querySelector('#pauseBtn');
 
 for(let i=0; i< 3; ++i) {
     store.dispatch(addChallenge({
@@ -29,13 +18,6 @@ for(let i=0; i< 3; ++i) {
         duration: 1000
     }));
 }
-
-resetBtn.addEventListener('click', () => {
-    store.dispatch(resetTime());
-});
-pauseBtn.addEventListener('click', () => {
-    store.dispatch(pauseTime());
-});
 
 const timeStart = moment();
 const interval = setInterval(() => {
@@ -46,34 +28,13 @@ const interval = setInterval(() => {
     const diff = now.diff(timeStart); // ms
     store.dispatch(setTime(diff));
 
-    // if (diff > 3000) {
-    //     clearInterval(interval);
-    // }
+    if (diff > 60 * 1000) {
+        clearInterval(interval);
+    }
 }, 200);
 
-const update = (state) => {
-    globalTime.innerHTML = formatTime(state.time.time);
-
-    const remainingChallenges = selectRemaining(state.challenge.list, state.time.time);
-    activeChallenges.innerHTML = Object.keys(remainingChallenges).map(
-        key => {
-            const item = remainingChallenges[key];
-            return `<tr><td>${key}</td><td>${formatTime(item.remaining)}</td><td>${formatTime(item.until)}</td></tr>`;
-        }
-    ).join('');
-    history.innerHTML = state.challenge.list.map(
-        item => `<tr><td>${item.name}</td><td>${formatTime(item.time)}</td><td>${formatTime(item.duration)}</td></tr>`
-    ).join('');
-};
-
-update(store.getState());
-
-store.subscribe(() => {
-    const state = store.getState();
-    update(state);
-});
-
-const controlsEl = document.querySelector('.js-controls');
-controlsEl.setAttribute('config', JSON.stringify(controls));
-const controlsContainerEl = document.querySelector('mvs-controls-container');
-controlsContainerEl.setStore(store);
+document.querySelector('mvs-controls-container').setStore(store);
+document.querySelector('mvs-controls-container').setAttribute('config', JSON.stringify(controls));
+document.querySelector('mvs-timer-container').setStore(store);
+document.querySelector('mvs-challenges-container').setStore(store);
+document.querySelector('mvs-history-container').setStore(store);
