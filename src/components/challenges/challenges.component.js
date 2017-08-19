@@ -1,14 +1,14 @@
 import { formatTime } from '../../util/format.js';
 
 const ownerDocument = document.currentScript.ownerDocument;
+const rowTemplate = ownerDocument.querySelector('#row');
 
 class ChallengesComponent extends HTMLElement {
     constructor () {
         super();
-        this.attachShadow({mode: 'open'});  // this.shadowRoot now available
         const template = ownerDocument.querySelector('#component-core');
         const clone = document.importNode(template.content, true);
-        this.shadowRoot.appendChild(clone);
+        this.appendChild(clone);
 
         this.params = {};
     }
@@ -32,9 +32,8 @@ class ChallengesComponent extends HTMLElement {
     }
 
     draw() {
-        const rowTemplate = ownerDocument.querySelector('#row');
 
-        const rowContainerEl = this.shadowRoot.querySelector('.js-container');
+        const rowContainerEl = this.querySelector('.js-container');
 
         while (rowContainerEl.firstChild) {
             rowContainerEl.removeChild(rowContainerEl.firstChild);

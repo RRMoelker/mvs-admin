@@ -5,10 +5,9 @@ const ownerDocument = document.currentScript.ownerDocument;
 class HistoryComponent extends HTMLElement {
     constructor () {
         super();
-        this.attachShadow({mode: 'open'});  // this.shadowRoot now available
         const template = ownerDocument.querySelector('#component-core');
         const clone = document.importNode(template.content, true);
-        this.shadowRoot.appendChild(clone);
+        this.appendChild(clone);
 
         this.params = {};
     }
@@ -34,7 +33,7 @@ class HistoryComponent extends HTMLElement {
     draw() {
         const rowTemplate = ownerDocument.querySelector('#row');
 
-        const rowContainerEl = this.shadowRoot.querySelector('.js-container');
+        const rowContainerEl = this.querySelector('.js-container');
 
         while (rowContainerEl.firstChild) {
             rowContainerEl.removeChild(rowContainerEl.firstChild);

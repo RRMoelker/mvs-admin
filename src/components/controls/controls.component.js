@@ -1,12 +1,12 @@
 const ownerDocument = document.currentScript.ownerDocument;
+const rowTemplate = ownerDocument.querySelector('#single-control');
 
 class ControlsComponent extends HTMLElement {
     constructor () {
         super();
-        this.attachShadow({mode: 'open'});  // this.shadowRoot now available
         const template = ownerDocument.querySelector('#component-core');
         const clone = document.importNode(template.content, true);
-        this.shadowRoot.appendChild(clone);
+        this.appendChild(clone);
     }
 
     static get observedAttributes () {
@@ -25,9 +25,8 @@ class ControlsComponent extends HTMLElement {
     }
 
     draw() {
-        const rowTemplate = ownerDocument.querySelector('#single-control');
 
-        const rowContainerEl = this.shadowRoot.querySelector('.js-control-container');
+        const rowContainerEl = this.querySelector('.js-control-container');
         for( const control of this.config ) {
             const row = document.importNode(rowTemplate.content, true);
             row.querySelector('.js-label').innerHTML = control.label;

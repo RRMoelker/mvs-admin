@@ -5,20 +5,19 @@ const ownerDocument = document.currentScript.ownerDocument;
 class TimerComponent extends HTMLElement {
     constructor () {
         super();
-        this.attachShadow({mode: 'open'});  // this.shadowRoot now available
         const template = ownerDocument.querySelector('#component-core');
         const clone = document.importNode(template.content, true);
-        this.shadowRoot.appendChild(clone);
+        this.appendChild(clone);
 
         this.params = {};
     }
 
     connectedCallback () {
         // Called when the element is inserted into a document, including into a shadow tree
-        this.shadowRoot.querySelector('.js-pauseBtn').addEventListener('click', () => {
+        this.querySelector('.js-pauseBtn').addEventListener('click', () => {
             this.dispatchEvent(new CustomEvent('pause-timer', {bubbles: true, composed: true, }));
         });
-        this.shadowRoot.querySelector('.js-resetBtn').addEventListener('click', () => {
+        this.querySelector('.js-resetBtn').addEventListener('click', () => {
             this.dispatchEvent(new CustomEvent('reset-timer', {bubbles: true, composed: true, }));
         });
     }
@@ -39,7 +38,7 @@ class TimerComponent extends HTMLElement {
     }
 
     draw() {
-        const timeDisplay = this.shadowRoot.querySelector('.js-time');
+        const timeDisplay = this.querySelector('.js-time');
         timeDisplay.innerHTML = formatTime(parseInt(this.params.time));
     }
 }
