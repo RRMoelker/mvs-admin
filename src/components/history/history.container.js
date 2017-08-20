@@ -1,5 +1,7 @@
 import HistoryComponent from './history.component.js';
 
+import { SHOW_HISTORY } from '../../constants.js';
+
 class HistoryContainer extends HTMLElement {
     constructor () {
         super();
@@ -11,7 +13,7 @@ class HistoryContainer extends HTMLElement {
         this.store.subscribe(()=>{
             const { challenge } = this.store.getState();
             // TODO: check if changed
-            this.child.setAttribute('list', JSON.stringify(challenge.list));
+            this.child.setAttribute('list', JSON.stringify(challenge.list.slice(-SHOW_HISTORY)));
         });
     }
 

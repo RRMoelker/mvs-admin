@@ -11,12 +11,15 @@ class ChallengesComponent extends HTMLElement {
         const clone = document.importNode(template.content, true);
         this.appendChild(clone);
 
-        this.params = {};
+        this.params = {
+            recent: {}
+        };
     }
 
     static get observedAttributes () {
         return [
             'list',
+            'recent'
         ];
     }
 
@@ -26,6 +29,9 @@ class ChallengesComponent extends HTMLElement {
         this.params[name] = newValue;
 
         if(name === 'list') {
+            this.params[name] = JSON.parse(this.params[name]);
+        }
+        if(name === 'recent') {
             this.params[name] = JSON.parse(this.params[name]);
         }
 
@@ -51,6 +57,12 @@ class ChallengesComponent extends HTMLElement {
             }
 
             row.querySelector('.js-until').innerHTML = formatTime(value.until);
+
+            const recent = this.params.recent[key];
+            if (recent) {
+                row.querySelector('.js-added').innerHTML = '+ ' + formatTime(recent);
+            }
+
             rowContainerEl.appendChild(row);
         }
     }

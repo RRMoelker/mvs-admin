@@ -60,7 +60,7 @@ module.exports = {
             }
         ]
     },
-    devtool: 'source-map',
+    devtool: 'source-map-eval',
     devServer: {
         port: 8080
     }

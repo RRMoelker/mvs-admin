@@ -1,8 +1,9 @@
 import { createAction } from 'redux-actions';
 
-import { mergeChallenges } from './merger.js';
+import { mergeOverlapping } from './merger.js';
 import {
     calculateActive,
+    calculateRecent,
     calculateRemaining,
     groupChallenges,
     getRemaining
@@ -20,13 +21,26 @@ export const selectRemaining = (list, now) => {
 
     const remaining = {};
     for( const [ key, groupList ] of Object.entries(grouped)) {
-        const merged = mergeChallenges(groupList);
+        const merged = mergeOverlapping(groupList);
         const active = calculateActive(merged, now);
         if ( active.length ) {
             remaining[key] = calculateRemaining(active, now);
         }
     }
     return remaining;
+}
+
+export const selectRecent = (list, now, threshold) => {
+    const recentList = calculateRecent(list, now, threshold);
+    const grouped = groupChallenges(recentList);
+    const result = {};
+    for( const [ key, value ] of Object.entries(grouped) ) {
+        result[key] = value.reduce(
+            (acc, val) => acc + val.duration,
+            0
+        );
+    };
+    return result;
 }
 
 export default (state = initialState, action) => {

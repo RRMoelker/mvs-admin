@@ -1,6 +1,10 @@
 import ChallengesComponent from './challenges.component.js';
+import { RECENT_THRESHOLD } from '../../constants.js';
 
-import { selectRemaining } from '../../state/challenge/reducer';
+import {
+    selectRecent,
+    selectRemaining
+} from '../../state/challenge/reducer';
 
 class ChallengesContainer extends HTMLElement {
     constructor () {
@@ -15,6 +19,9 @@ class ChallengesContainer extends HTMLElement {
             // TODO: check if changed
             const remainingList = selectRemaining(challenge.list, time.time);
             this.child.setAttribute('list', JSON.stringify(remainingList));
+
+            const recentList = selectRecent(challenge.list, time.time, RECENT_THRESHOLD);
+            this.child.setAttribute('recent', JSON.stringify(recentList));
         });
     }
 

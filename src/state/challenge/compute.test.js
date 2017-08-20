@@ -1,6 +1,7 @@
 import {
     calculateActive,
     calculateRemaining,
+    calculateRecent,
     groupChallenges
 } from './compute.js';
 
@@ -47,6 +48,36 @@ describe('challenge grouping', () => {
             minimap: [{
                 name: 'minimap',
                 duration: 10
+            }]
+        });
+    });
+
+    it('should group multiple challenges', () => {
+        expect(groupChallenges([
+            {
+                name: 'minimap',
+                duration: 10,
+            },
+            {
+                name: 'health',
+                duration: 10,
+            },
+            {
+                name: 'minimap',
+                duration: 10,
+            }
+        ])).toEqual({
+            minimap: [{
+                name: 'minimap',
+                duration: 10
+            },
+            {
+                name: 'minimap',
+                duration: 10
+            }],
+            health: [{
+                name: 'health',
+                duration: 10,
             }]
         });
     });
@@ -126,3 +157,34 @@ describe('remaining challenges', () => {
     });
 });
 
+describe('recent challenges', () => {
+    it('returns recent', () => {
+        const list = [
+            {
+                name: 'glove',
+                duration: 10,
+                time: 1
+            }
+        ];
+
+        const now = 3;
+        const result = calculateRecent(list, now, 5);
+
+        expect(result).toEqual(list);
+    });
+
+    it('does not return beyond threshold', () => {
+        const list = [
+            {
+                name: 'glove',
+                duration: 10,
+                time: 1
+            }
+        ];
+
+        const now = 3;
+        const result = calculateRecent(list, now, 1);
+
+        expect(result).toEqual([]);
+    });
+});

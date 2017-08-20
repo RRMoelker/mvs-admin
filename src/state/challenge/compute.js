@@ -28,6 +28,14 @@ export const calculateActive = (list, now) => {
     );
 };
 
+/**
+ * Groups a list of challenges by name:
+ *  [{ name: a }, { name: a }, { name: b }] =>
+ *  {
+ *      a: [{ name: a },{ name: a }]
+ *      b: [{ name: b }]
+ *  }
+ */
 export const groupChallenges = list => {
     if ( list.length === 0 ) {
         return {};
@@ -49,5 +57,11 @@ export const groupChallenges = list => {
             return acc;
         },
         groups
+    );
+};
+
+export const calculateRecent = (list, now, threshold) => {
+    return list.filter(
+        item => item.time >= now - threshold
     );
 };
