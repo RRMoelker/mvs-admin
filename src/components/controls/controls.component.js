@@ -1,6 +1,7 @@
 const ownerDocument = document.currentScript.ownerDocument;
 const rowTemplate = ownerDocument.querySelector('#single-control');
 
+
 class ControlsComponent extends HTMLElement {
     constructor () {
         super();
@@ -24,20 +25,20 @@ class ControlsComponent extends HTMLElement {
         this.draw();
     }
 
+    addChallenge (name, duration) {
+        this.dispatchEvent(new CustomEvent('add-challenge', {bubbles: true, composed: true, detail: {
+            name,
+            duration
+        }}));
+    }
+
     draw() {
 
         const rowContainerEl = this.querySelector('.js-control-container');
         for( const control of this.config ) {
             const row = document.importNode(rowTemplate.content, true);
             row.querySelector('.js-label').innerHTML = control.label;
-            row.querySelector('.js-add').addEventListener('click', () => {
-                const name = control.name;
-                const duration = 2000;
-                this.dispatchEvent(new CustomEvent('add-challenge', {bubbles: true, composed: true, detail: {
-                    name,
-                    duration
-                }}));
-            });
+            row.querySelector('.js-add').addEventListener('click', () => this.addChallenge(control.name, 2000));
             rowContainerEl.appendChild(row);
         }
     }
