@@ -1,4 +1,5 @@
 import { formatTime } from '../../util/format.js';
+import { ALMOST_THRESHOLD } from '../../constants.js';
 
 const ownerDocument = document.currentScript.ownerDocument;
 const rowTemplate = ownerDocument.querySelector('#row');
@@ -41,7 +42,14 @@ class ChallengesComponent extends HTMLElement {
         for( const [ key, value ] of Object.entries(this.params.list) ) {
             const row = document.importNode(rowTemplate.content, true);
             row.querySelector('.js-label').innerHTML = key;
-            row.querySelector('.js-remaining').innerHTML = formatTime(value.remaining);
+
+            const remainingEl = row.querySelector('.js-remaining');
+            remainingEl.innerHTML = formatTime(value.remaining);
+
+            if ( value.remaining < ALMOST_THRESHOLD) {
+                remainingEl.classList.add('almost');
+            }
+
             row.querySelector('.js-until').innerHTML = formatTime(value.until);
             rowContainerEl.appendChild(row);
         }

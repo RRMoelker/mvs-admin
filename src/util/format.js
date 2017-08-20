@@ -6,8 +6,8 @@ export const formatTime = milliseconds => {
     const time = moment.utc(milliseconds);
     const hours = time.hours();
     const format = hours > 0
-        ? 'H:mm:ss:SS'
-        : 'mm:ss:SS';
+        ? 'H:mm:ss.SS'
+        : 'mm:ss.SS';
 
     if (isNegative) {
         return '-' + time.format(format);

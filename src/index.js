@@ -12,10 +12,10 @@ import {
     setTime
 } from './state/time/reducer.js';
 
-for(let i=0; i< 3; ++i) {
+for(let i=0; i < 2; ++i) {
     store.dispatch(addChallenge({
         name: 'minimap',
-        duration: 1000
+        duration: 2 * 60 * 1000
     }));
 }
 
