@@ -1,6 +1,7 @@
 const ownerDocument = document.currentScript.ownerDocument;
 const rowTemplate = ownerDocument.querySelector('#single-control');
 
+const DEFAULT_DURATION = 2 * 60 * 1000;
 
 class ControlsComponent extends HTMLElement {
     constructor () {
@@ -33,12 +34,11 @@ class ControlsComponent extends HTMLElement {
     }
 
     draw() {
-
         const rowContainerEl = this.querySelector('.js-control-container');
         for( const control of this.config ) {
             const row = document.importNode(rowTemplate.content, true);
             row.querySelector('.js-label').innerHTML = control.label;
-            row.querySelector('.js-add').addEventListener('click', () => this.addChallenge(control.name, 2000));
+            row.querySelector('.js-add').addEventListener('click', () => this.addChallenge(control.name, DEFAULT_DURATION));
             rowContainerEl.appendChild(row);
         }
     }

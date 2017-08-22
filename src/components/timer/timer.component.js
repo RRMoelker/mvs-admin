@@ -13,8 +13,9 @@ class TimerComponent extends HTMLElement {
     }
 
     connectedCallback () {
+        this.pauseBtn = this.querySelector('.js-pauseBtn');
         // Called when the element is inserted into a document, including into a shadow tree
-        this.querySelector('.js-pauseBtn').addEventListener('click', () => {
+        this.pauseBtn.addEventListener('click', () => {
             this.dispatchEvent(new CustomEvent('pause-timer', {bubbles: true, composed: true, }));
         });
         this.querySelector('.js-resetBtn').addEventListener('click', () => {
@@ -34,6 +35,11 @@ class TimerComponent extends HTMLElement {
         // or replaced on the element. Only called for observed attributes.
         this.params[name] = newValue;
 
+        switch(name) {
+        case 'running':
+            this.pauseBtn.innerHTML = JSON.parse(newValue) ? 'pause' : 'play';
+            break;
+        }
         this.draw();
     }
 
