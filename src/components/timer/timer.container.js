@@ -1,9 +1,29 @@
+import moment from 'moment';
+
 import {
-    resetTime,
-    pauseTime
-} from '../../state/time/reducer.js';
+    setTimer,
+    resetTimer,
+    pauseTimer
+} from '../../state/timer/reducer.js';
 
 import TimerComponent from './timer.component.js';
+
+let interval;
+const startInterval = (store) => {
+    const timeStart = moment();
+    interval = setInterval(() => {
+        if(!store.getState().timer.running) {
+            return;
+        }
+        const now = moment();
+        const diff = now.diff(timeStart); // ms
+        store.dispatch(setTimer(diff));
+
+        if (diff > 60 * 1000) {
+            clearInterval(interval);
+        }
+    }, 200);
+};
 
 class TimerContainer extends HTMLElement {
     constructor () {
@@ -12,19 +32,23 @@ class TimerContainer extends HTMLElement {
         this.appendChild(this.child);
 
         this.child.addEventListener('reset-timer', () => {
-            this.store.dispatch(resetTime());
+            this.store.dispatch(resetTimer());
         });
         this.child.addEventListener('pause-timer', () => {
-            this.store.dispatch(pauseTime());
+            this.store.dispatch(pauseTimer());
         });
     }
 
     subscribe () {
         this.store.subscribe(()=>{
-            const { time } = this.store.getState();
+            const { timer } = this.store.getState();
             // TODO: check if changed
-            this.child.setAttribute('time', time.time);
-            this.child.setAttribute('running', time.running);
+            this.child.setAttribute('time', timer.time);
+            this.child.setAttribute('running', timer.running);
+
+            if (!interval && timer.running) {
+                startInterval(this.store);
+            }
         });
     }
 

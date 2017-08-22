@@ -15,12 +15,12 @@ class ChallengesContainer extends HTMLElement {
 
     subscribe () {
         this.store.subscribe(()=>{
-            const { challenge, time } = this.store.getState();
+            const { challenge, timer } = this.store.getState();
             // TODO: check if changed
-            const remainingList = selectRemaining(challenge.list, time.time);
+            const remainingList = selectRemaining(challenge.list, timer.time);
             this.child.setAttribute('list', JSON.stringify(remainingList));
 
-            const recentList = selectRecent(challenge.list, time.time, RECENT_THRESHOLD);
+            const recentList = selectRecent(challenge.list, timer.time, RECENT_THRESHOLD);
             this.child.setAttribute('recent', JSON.stringify(recentList));
         });
     }
