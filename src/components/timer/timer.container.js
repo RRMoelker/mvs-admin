@@ -9,17 +9,22 @@ import {
 import TimerComponent from './timer.component.js';
 
 let interval;
+let elapsed = 0;
+let lastNow;
 const startInterval = (store) => {
-    const timeStart = moment();
+    lastNow = moment();
     interval = setInterval(() => {
         if(!store.getState().timer.running) {
+            lastNow = moment();
             return;
         }
         const now = moment();
-        const diff = now.diff(timeStart); // ms
-        store.dispatch(setTimer(diff));
+        elapsed = elapsed + now.diff(lastNow); // ms
+        store.dispatch(setTimer(elapsed));
 
-        if (diff > 60 * 1000) {
+        lastNow = now;
+
+        if (elapsed > 60 * 1000) {
             clearInterval(interval);
         }
     }, 200);
@@ -45,11 +50,8 @@ class TimerContainer extends HTMLElement {
             // TODO: check if changed
             this.child.setAttribute('time', timer.time);
             this.child.setAttribute('running', timer.running);
-
-            if (!interval && timer.running) {
-                startInterval(this.store);
-            }
         });
+        startInterval(this.store);
     }
 
     setStore (store) {

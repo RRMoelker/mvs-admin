@@ -18,9 +18,9 @@ class TimerComponent extends HTMLElement {
         this.pauseBtn.addEventListener('click', () => {
             this.dispatchEvent(new CustomEvent('pause-timer', {bubbles: true, composed: true, }));
         });
-        this.querySelector('.js-resetBtn').addEventListener('click', () => {
-            this.dispatchEvent(new CustomEvent('reset-timer', {bubbles: true, composed: true, }));
-        });
+        // this.querySelector('.js-resetBtn').addEventListener('click', () => {
+        //     this.dispatchEvent(new CustomEvent('reset-timer', {bubbles: true, composed: true, }));
+        // });
     }
 
     static get observedAttributes () {
