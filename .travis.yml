@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - 'stable'
+
 cache:
   directories:
     - node_modules
@@ -16,6 +17,4 @@ script:
 - ssh-add deploy-key
 - git config user.name "Automatic Publish"
 - git config user.email "RRMoelker@users.noreply.github.com"
-- git remote add gh-token "${GH_REF}";
-- git fetch gh-token && git fetch gh-token gh-pages:gh-pages;
 - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then echo "Pushing to github"; node ./scripts/deploy-gh-pages.js
