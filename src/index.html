@@ -1,44 +1,5 @@
 <head>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-        }
-        .almost {
-            color: green;
-        }
-        .added {
-            color: red;
-        }
-        table {
-            /*width: 100%;*/
-            text-align: right;
-        }
-        table th, table td {
-            padding: 0 1rem;
-        }
-        button {
-            display: inline-block;
-            padding: .2rem 0.5rem;
-            color: rgba(0,0,0,.8);
-            border: none;
-            background-color: lightgray;
-            text-decoration: none;
-            border-radius: 2px;
-        }
-        input {
-            background-color: lightgray;
-            border: solid 1px gray;
-            width: 3rem;
-        }
-        .column {
-            float: left;
-            width: 50%;
-        }
-        .clear {
-            clear: both;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/assets/main.css">
 
     <script src="custom-elements-es5-adapter.js"></script>
 
@@ -52,26 +13,28 @@
     <mvs-timer-container class="js-timer">
     </mvs-timer-container>
 
-    <div class="column">
+    <div class="o-column">
         <mvs-panel name="Challenges">
             <mvs-challenges-container class="js-challenges">
             </mvs-challenges-container>
         </mvs-panel>
     </div>
 
-    <div class="column">
+    <div class="o-column">
         <mvs-panel name="Controls">
             <mvs-controls-container class="js-controls">
             </mvs-controls-container>
         </mvs-panel>
     </div>
 
-    <div class="clear"></div>
+    <div class="u-clear"></div>
 
-    <mvs-panel name="Recent">
-        <mvs-history-container class="js-history">
-        </mvs-history-container>
-    </mvs-panel>
+    <div class="o-column">
+        <mvs-panel name="Recent">
+            <mvs-history-container class="js-history">
+            </mvs-history-container>
+        </mvs-panel>
+    </div>
 
     <script src="/main.js"></script>
 </body>

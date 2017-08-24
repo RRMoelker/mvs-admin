@@ -36,27 +36,28 @@ class TimerContainer extends HTMLElement {
         this.child = new TimerComponent();
         this.appendChild(this.child);
 
-        this.child.addEventListener('reset-timer', () => {
-            this.store.dispatch(resetTimer());
-        });
-        this.child.addEventListener('pause-timer', () => {
-            this.store.dispatch(pauseTimer());
-        });
     }
 
-    subscribe () {
-        this.store.subscribe(()=>{
-            const { timer } = this.store.getState();
-            // TODO: check if changed
-            this.child.setAttribute('time', timer.time);
-            this.child.setAttribute('running', timer.running);
-        });
-        startInterval(this.store);
+    onStateChange(state) {
+        const { timer } = state;
+        // TODO: check if changed
+        this.child.setAttribute('time', timer.time);
+        this.child.setAttribute('running', timer.running);
     }
 
     setStore (store) {
-        this.store = store;
-        this.subscribe();
+        store.subscribe(()=>{
+            this.onStateChange(store.getState());
+        });
+        this.onStateChange(store.getState());
+        startInterval(store);
+
+        this.child.addEventListener('reset-timer', () => {
+            store.dispatch(resetTimer());
+        });
+        this.child.addEventListener('pause-timer', () => {
+            store.dispatch(pauseTimer());
+        });
     }
 }
 

@@ -9,7 +9,7 @@ export const pauseTimer = createAction(TIMER_PAUSE);
 
 const initialState = {
     time: 0,
-    running: true
+    running: false
 }
 
 export default (state = initialState, action) => {

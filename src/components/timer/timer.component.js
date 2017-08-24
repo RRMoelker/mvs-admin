@@ -18,9 +18,6 @@ class TimerComponent extends HTMLElement {
         this.pauseBtn.addEventListener('click', () => {
             this.dispatchEvent(new CustomEvent('pause-timer', {bubbles: true, composed: true, }));
         });
-        // this.querySelector('.js-resetBtn').addEventListener('click', () => {
-        //     this.dispatchEvent(new CustomEvent('reset-timer', {bubbles: true, composed: true, }));
-        // });
     }
 
     static get observedAttributes () {
@@ -31,20 +28,13 @@ class TimerComponent extends HTMLElement {
     }
 
     attributeChangedCallback (name, oldValue, newValue) {
-        // Called when an attribute is changed, appended, removed,
-        // or replaced on the element. Only called for observed attributes.
         this.params[name] = newValue;
-
-        switch(name) {
-        case 'running':
-            this.pauseBtn.innerHTML = JSON.parse(newValue) ? 'pause' : 'play';
-            break;
-        }
         this.draw();
     }
 
     draw() {
         const timeDisplay = this.querySelector('.js-time');
+        this.pauseBtn.innerHTML = this.params.running && JSON.parse(this.params.running) ? 'Pause' : 'Play';
         timeDisplay.innerHTML = formatTime(parseInt(this.params.time));
     }
 }

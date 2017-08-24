@@ -13,21 +13,21 @@ class ChallengesContainer extends HTMLElement {
         this.appendChild(this.child);
     }
 
-    subscribe () {
-        this.store.subscribe(()=>{
-            const { challenge, timer } = this.store.getState();
-            // TODO: check if changed
-            const remainingList = selectRemaining(challenge.list, timer.time);
-            this.child.setAttribute('list', JSON.stringify(remainingList));
+    onStateChange(state) {
+        const { challenge, timer } = state;
+        // TODO: check if changed
+        const remainingList = selectRemaining(challenge.list, timer.time);
+        this.child.setAttribute('list', JSON.stringify(remainingList));
 
-            const recentList = selectRecent(challenge.list, timer.time, RECENT_THRESHOLD);
-            this.child.setAttribute('recent', JSON.stringify(recentList));
-        });
+        const recentList = selectRecent(challenge.list, timer.time, RECENT_THRESHOLD);
+        this.child.setAttribute('recent', JSON.stringify(recentList));
     }
 
     setStore (store) {
-        this.store = store;
-        this.subscribe();
+        store.subscribe(()=>{
+            this.onStateChange(store.getState());
+        });
+        this.onStateChange(store.getState());
     }
 }
 

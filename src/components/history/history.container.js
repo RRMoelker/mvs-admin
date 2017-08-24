@@ -10,22 +10,23 @@ class HistoryContainer extends HTMLElement {
         this.child = new HistoryComponent();
         this.appendChild(this.child);
 
-        this.child.addEventListener('remove-challenge', e => {
-            this.store.dispatch(removeChallenge(e.detail));
-        });
     }
 
-    subscribe () {
-        this.store.subscribe(()=>{
-            const { challenge } = this.store.getState();
-            // TODO: check if changed
-            this.child.setAttribute('list', JSON.stringify(challenge.list.slice(-SHOW_HISTORY)));
-        });
+    onStateChange(state) {
+        const { challenge } = state;
+        // TODO: check if changed
+        this.child.setAttribute('list', JSON.stringify(challenge.list.slice(-SHOW_HISTORY)));
     }
 
     setStore (store) {
-        this.store = store;
-        this.subscribe();
+        store.subscribe(()=>{
+            this.onStateChange(store.getState());
+        });
+        this.onStateChange(store.getState());
+
+        this.child.addEventListener('remove-challenge', e => {
+            store.dispatch(removeChallenge(e.detail));
+        });
     }
 }
 
