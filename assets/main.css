@@ -1,0 +1,62 @@
+body {
+    background-color: black;
+    color: white;
+}
+input {
+    background-color: lightgray;
+    border: solid 1px gray;
+    width: 5rem;
+    text-align: center;
+}
+table {
+    width: 100%;
+    text-align: right;
+    table-layout: fixed;
+    text-align: center;
+}
+table th, table td {
+    padding: 0 1rem;
+}
+.o-column {
+    float: left;
+    width: 50%;
+}
+.c-challenges__challenge--almost {
+    color: green;
+}
+.c-challenges__challenge--added {
+    color: red;
+}
+.c-button {
+    display: inline-block;
+    padding: .2rem 0.5rem;
+    color: rgba(0,0,0,.8);
+    border: none;
+    background-color: lightgray;
+    text-decoration: none;
+    border-radius: 2px;
+    min-width: 3rem;
+}
+.c-button:hover, .c-button:focus {
+    background-color: darkgray;
+}
+.c-button--symbol {
+    background-color: transparent;
+    color: red;
+    font-size: 1em;
+    line-height: 1em;
+    border: none;
+}
+.c-button--symbol:hover {
+    font-weight: bold;
+}
+.c-timer__label {
+    margin-right: 1rem;
+}
+.c-timer__time {
+    margin-right: 2rem;
+}
+
+.u-clear {
+    clear: both;
+}

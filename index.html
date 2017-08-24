@@ -1,0 +1,40 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="/assets/main.css">
+
+    <script src="custom-elements-es5-adapter.js"></script>
+
+    <link rel="import" href="components/panel/panel.component.html">
+    <link rel="import" href="components/controls/controls.component.html">
+    <link rel="import" href="components/timer/timer.component.html">
+    <link rel="import" href="components/challenges/challenges.component.html">
+    <link rel="import" href="components/history/history.component.html">
+</head>
+<body>
+    <mvs-timer-container class="js-timer">
+    </mvs-timer-container>
+
+    <div class="o-column">
+        <mvs-panel name="Challenges">
+            <mvs-challenges-container class="js-challenges">
+            </mvs-challenges-container>
+        </mvs-panel>
+    </div>
+
+    <div class="o-column">
+        <mvs-panel name="Controls">
+            <mvs-controls-container class="js-controls">
+            </mvs-controls-container>
+        </mvs-panel>
+    </div>
+
+    <div class="u-clear"></div>
+
+    <div class="o-column">
+        <mvs-panel name="Recent">
+            <mvs-history-container class="js-history">
+            </mvs-history-container>
+        </mvs-panel>
+    </div>
+
+    <script src="/main.js"></script>
+</body>
