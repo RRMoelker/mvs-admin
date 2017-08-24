@@ -1,12 +1,18 @@
+import { removeChallenge } from '../../state/challenge/reducer.js';
+import { SHOW_HISTORY } from '../../constants.js';
+
 import HistoryComponent from './history.component.js';
 
-import { SHOW_HISTORY } from '../../constants.js';
 
 class HistoryContainer extends HTMLElement {
     constructor () {
         super();
         this.child = new HistoryComponent();
         this.appendChild(this.child);
+
+        this.child.addEventListener('remove-challenge', e => {
+            this.store.dispatch(removeChallenge(e.detail));
+        });
     }
 
     subscribe () {

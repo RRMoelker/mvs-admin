@@ -30,6 +30,12 @@ class HistoryComponent extends HTMLElement {
         this.draw();
     }
 
+    removeChallenge (uuid) {
+        this.dispatchEvent(new CustomEvent('remove-challenge', {bubbles: true, composed: true, detail: {
+            uuid
+        }}));
+    }
+
     draw() {
         const rowTemplate = ownerDocument.querySelector('#row');
 
@@ -43,6 +49,9 @@ class HistoryComponent extends HTMLElement {
             row.querySelector('.js-label').innerHTML = value.name;
             row.querySelector('.js-time').innerHTML = formatTime(value.time);
             row.querySelector('.js-duration').innerHTML = formatTime(value.duration);
+            row.querySelector('.js-removeBtn').addEventListener('mousedown',
+                () => this.removeChallenge(value.uuid)
+            );
             rowContainerEl.appendChild(row);
         }
     }
