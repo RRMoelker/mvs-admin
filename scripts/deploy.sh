@@ -8,7 +8,7 @@ TARGET_BRANCH="gh-pages"
 
 echo "Running tests"
 
-# npm test
+npm run test-once
 
 echo "Deploying"
 
@@ -24,6 +24,8 @@ openssl aes-256-cbc -K $encrypted_6c022d3a0baa_key -iv $encrypted_6c022d3a0baa_i
 chmod 600 deploy-key
 eval `ssh-agent -s`
 ssh-add deploy-key
+
 git config user.name "Automatic Publish"
 git config user.email "RRMoelker@users.noreply.github.com"
+
 NODE_DEBUG=gh-pages npm run deploy

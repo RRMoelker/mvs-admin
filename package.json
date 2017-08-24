@@ -8,7 +8,7 @@
     "start": "webpack-dev-server",
     "test": "jest --watch",
     "test-once": "jest",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist --repo git@github.com:RRMoelker/mvs-admin.git"
   },
   "repository": {
     "type": "git",
