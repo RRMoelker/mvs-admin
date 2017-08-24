@@ -53,7 +53,7 @@ class ChallengesComponent extends HTMLElement {
             remainingEl.innerHTML = formatTime(value.remaining);
 
             if ( value.remaining < ALMOST_THRESHOLD) {
-                remainingEl.classList.add('almost');
+                remainingEl.classList.add('c-challenges__challenge--almost');
             }
 
             row.querySelector('.js-until').innerHTML = formatTime(value.until);
