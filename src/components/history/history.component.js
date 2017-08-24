@@ -44,6 +44,8 @@ class HistoryComponent extends HTMLElement {
         while (rowContainerEl.firstChild) {
             rowContainerEl.removeChild(rowContainerEl.firstChild);
         }
+
+        const rowEls = [];
         for( const [ , value ] of Object.entries(this.params.list) ) {
             const row = document.importNode(rowTemplate.content, true);
             row.querySelector('.js-label').innerHTML = value.name;
@@ -52,8 +54,9 @@ class HistoryComponent extends HTMLElement {
             row.querySelector('.js-removeBtn').addEventListener('mousedown',
                 () => this.removeChallenge(value.uuid)
             );
-            rowContainerEl.appendChild(row);
+            rowEls.unshift(row);
         }
+        rowContainerEl.append(...rowEls);
     }
 }
 

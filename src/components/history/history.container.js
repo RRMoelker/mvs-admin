@@ -3,13 +3,11 @@ import { SHOW_HISTORY } from '../../constants.js';
 
 import HistoryComponent from './history.component.js';
 
-
 class HistoryContainer extends HTMLElement {
     constructor () {
         super();
         this.child = new HistoryComponent();
         this.appendChild(this.child);
-
     }
 
     onStateChange(state) {

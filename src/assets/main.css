@@ -40,6 +40,9 @@ table th, table td {
 .c-button--symbol:hover {
     font-weight: bold;
 }
+.c-timer__label {
+    margin-right: 1rem;
+}
 .c-timer__time {
     margin-right: 2rem;
 }
