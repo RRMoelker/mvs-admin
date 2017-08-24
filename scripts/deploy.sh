@@ -1,7 +1,7 @@
 #!/bin/bash
 # Loosely based on deploy script: https://gist.github.com/domenic/ec8b0fc8ab45f39403dd
 set -e # Exit with nonzero exit code if anything fails
-set -x
+# set -x # Debug print
 
 SOURCE_BRANCH="master"
 TARGET_BRANCH="gh-pages"
@@ -10,15 +10,16 @@ echo "Running tests"
 
 npm run test-once
 
-echo "Deploying"
-
+echo "Running build"
 npm run build
 
-# # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
-# if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
-#     echo "Skipping deploy"
-#     exit 0
-# fi
+# Pull requests and commits to other branches shouldn't try to deploy, just build to verify
+if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
+    echo "Skipping deploy"
+    exit 0
+fi
+
+echo "Deploying"
 
 openssl aes-256-cbc -K $encrypted_6c022d3a0baa_key -iv $encrypted_6c022d3a0baa_iv -in deploy-key.enc -out deploy-key -d
 chmod 600 deploy-key
