@@ -1,5 +1,6 @@
 import reducer, {
     addChallenge,
+    removeChallenge,
     selectRemaining
 } from './reducer.js';
 
@@ -20,6 +21,20 @@ describe('the challenge reducer', () => {
             duration: 2000
         }));
 
+        expect(result).toMatchSnapshot();
+    });
+});
+
+describe('the challenge reducer', () => {
+    it('should remove elements from the list', () =>{
+        const stepState = reducer(undefined, addChallenge({
+            name: 'minimap',
+            duration: 1000
+        }));
+
+        const result = reducer(stepState, removeChallenge({ uuid: stepState.list[0].uuid}));
+
+        expect(result.list.length).toBe(0);
         expect(result).toMatchSnapshot();
     });
 });

@@ -4,8 +4,8 @@
   "description": "Work in progress!",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -p",
-    "watch": "webpack-dev-server",
+    "build": "webpack -p",
+    "start": "webpack-dev-server",
     "test": "jest --watch",
     "test-once": "jest"
   },
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/RRMoelker/mvs-admin#readme",
   "dependencies": {
+    "@webcomponents/webcomponentsjs": "1.0.5",
     "moment": "2.18.1",
     "redux": "3.7.2",
     "redux-actions": "2.2.1"

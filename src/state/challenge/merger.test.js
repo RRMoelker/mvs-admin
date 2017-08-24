@@ -1,11 +1,11 @@
-import { mergeChallenges } from './merger.js';
+import { mergeOverlapping } from './merger.js';
 
 it('should return single item lists', () => {
     const list = [
         { time: 1000, duration: 1000}
     ];
 
-    const result = mergeChallenges(list);
+    const result = mergeOverlapping(list);
 
     expect(result).toEqual(list);
 });
@@ -16,7 +16,7 @@ it('should not merge non overlapping challenges', () =>{
         { time: 3000, duration: 1000},
     ];
 
-    const result = mergeChallenges(list);
+    const result = mergeOverlapping(list);
 
     expect(result).toEqual(list);
 });
@@ -27,7 +27,7 @@ it('should merge overlapping challenges', () =>{
         { time: 1500, duration: 1000},
     ];
 
-    const result = mergeChallenges(list);
+    const result = mergeOverlapping(list);
 
     expect(result).toEqual([
         { time: 1000, duration: 2000 }
@@ -40,7 +40,7 @@ it('should merge directly following challenges', () =>{
         { time: 2000, duration: 1000},
     ];
 
-    const result = mergeChallenges(list);
+    const result = mergeOverlapping(list);
 
     expect(result).toEqual([
         { time: 1000, duration: 2000 }
@@ -55,7 +55,7 @@ it('should handle multiple overlaps', () =>{
         { time: 1500, duration: 1000},
     ];
 
-    const result = mergeChallenges(list);
+    const result = mergeOverlapping(list);
 
     expect(result).toEqual([
         { time: 1000, duration: 4000 }
@@ -70,7 +70,7 @@ it('should split overlaps', () =>{
         { time: 4200, duration: 1000},
     ];
 
-    const result = mergeChallenges(list);
+    const result = mergeOverlapping(list);
 
     expect(result).toEqual([
         { time: 1000, duration: 2000 },
@@ -89,7 +89,7 @@ it('should handle very complex input', () =>{
         { time: 8500, duration: 1000},
     ];
 
-    const result = mergeChallenges(list);
+    const result = mergeOverlapping(list);
 
     expect(result).toEqual([
         { time: 1000, duration: 1000 },

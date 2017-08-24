@@ -1,168 +1,40 @@
 <head>
-    <style>
-    body {
-        background-color: black;
-        color: white;
-    }
-    .almost {
-        color: green;
-    }
-    .added {
-        color: red;
-    }
-    table td {
-        padding: 0 1rem;
-    }
-    button {
-        display: inline-block;
-        padding: .2rem 0.5rem;
-        color: rgba(0,0,0,.8);
-        border: none;
-        background-color: lightgray;
-        text-decoration: none;
-        border-radius: 2px;
-    }
-    input {
-        background-color: lightgray;
-        border: solid 1px gray;
-        width: 3rem;
-    }
-    .column {
-        float: left;
-        width: 50%;
-    }
-    .clear {
-        clear: both;
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/assets/main.css">
+
+    <script src="custom-elements-es5-adapter.js"></script>
+
+    <link rel="import" href="components/panel/panel.component.html">
+    <link rel="import" href="components/controls/controls.component.html">
+    <link rel="import" href="components/timer/timer.component.html">
+    <link rel="import" href="components/challenges/challenges.component.html">
+    <link rel="import" href="components/history/history.component.html">
 </head>
 <body>
+    <mvs-timer-container class="js-timer">
+    </mvs-timer-container>
 
-    <div>Time: <span id="time">00:00:00</span>
-        <button id="pauseBtn">pause</button>
-        <button id="resetBtn">reset</button>
+    <div class="o-column">
+        <mvs-panel name="Challenges">
+            <mvs-challenges-container class="js-challenges">
+            </mvs-challenges-container>
+        </mvs-panel>
     </div>
 
-    <div class="column">
-        <h2>Challenges</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Remaining</th>
-                    <th>Until</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="activeChallenges">
-                <tr>
-                    <td>No minimap</td>
-                    <td class="almost">0:00:03</td>
-                    <td class="almost">4:40:24</td>
-                </tr>
-                <tr>
-                    <td>Ski goggles</td>
-                    <td>0:01:51</td>
-                    <td>4:42:12</td>
-                </tr>
-                <tr>
-                    <td>No health pots</td>
-                    <td>0:03:31</td>
-                    <td>4:43:52</td>
-                </tr>
-                <tr>
-                    <td>Oven glove</td>
-                    <td class="added">0:10:25</td>
-                    <td class="added">4:50:46</td>
-                    <td class="added">+ 2:00</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="o-column">
+        <mvs-panel name="Controls">
+            <mvs-controls-container class="js-controls">
+            </mvs-controls-container>
+        </mvs-panel>
     </div>
 
-    <div class="column">
-        <h2>Controls</h2>
+    <div class="u-clear"></div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Amount</th>
-                    <th>Actions</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>No minimap</td>
-                    <td><input type="text" placeholder='2:00' /></input></td></td>
-                    <td><button class="js-add" data-type="minimap">Add</button></td>
-                    <td><button class="js-substract" data-type="minimap">Substract</button></td>
-                </tr>
-                <tr>
-                    <td>No health potions</td>
-                    <td><input type="text" placeholder='2:00' /></input></td></td>
-                    <td><button class="js-add" data-type="health">Add</button></td>
-                    <td><button class="js-substract" data-type="minimap">Substract</button></td>
-                </tr>
-                <tr>
-                    <td>Ski goggles</td>
-                    <td><input type="text" placeholder='5:00' /></input></td></td>
-                    <td><button class="js-add" data-type="ski">Add</button></td>
-                    <td><button class="js-substract" data-type="minimap">Substract</button></td>
-                </tr>
-                <tr>
-                    <td>Oven glove</td>
-                    <td><input type="text" placeholder='5:00' /></input></td></td>
-                    <td><button class="js-add" data-type="glove">Add</button></td>
-                    <td><button class="js-substract" data-type="minimap">Substract</button></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="o-column">
+        <mvs-panel name="Recent">
+            <mvs-history-container class="js-history">
+            </mvs-history-container>
+        </mvs-panel>
     </div>
 
-    <div class="clear"></div>
-
-    <div>
-        <h2>History</h2>
-
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Time</th>
-                    <th>Duration</th>
-                </tr>
-            </thead>
-            <tbody id="challengeHistory">
-                <tr>
-                    <td>Oven glove</td>
-                    <td>4:37:40</td>
-                    <td>+5:00</td>
-                </tr>
-                <tr>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                </tr>
-                <tr>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                </tr>
-                <tr>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                </tr>
-                <tr>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <script src="/bundle.js"></script>
+    <script src="/main.js"></script>
 </body>

@@ -4,12 +4,18 @@ Work in progress!
 
 App: https://rrmoelker.github.io/mvs-admin/
 
+## Install
+
+```
+npm install
+```
+
 ## Production
 
 Building
 
 ```
-npm start
+npm run build
 ```
 
 The site is served through gh-pages.
@@ -17,12 +23,13 @@ The site is served through gh-pages.
 
 ## Development
 
-Production build
+Development server
 ```
 npm start
 ```
 
-Development server
+## Testing
+
 ```
-npm run watch
+npm test
 ```

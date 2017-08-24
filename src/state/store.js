@@ -3,20 +3,20 @@ import { createAction } from 'redux-actions';
 import moment from 'moment';
 
 import challengeReducer from './challenge/reducer';
-import timeReducer, { TIME_SET } from './time/reducer';
+import timerReducer, { TIMER_SET } from './timer/reducer';
 
 const combined = combineReducers({
-    time: timeReducer,
+    timer: timerReducer,
     challenge: challengeReducer
 });
 
 const rootReducer = (state, action) => {
     // TODO: create middleware that timestamps each action OR wrap all action creators so they add the time
     let time;
-    if (action.type === TIME_SET ) {
+    if (action.type === TIMER_SET ) {
         time = action.payload;
     } else {
-        time = state.time && state.time.time;
+        time = state.timer && state.timer.time;
     }
     const timedAction = {
         ...action,

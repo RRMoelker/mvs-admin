@@ -1,14 +1,14 @@
 import reducer, {
-    setTime,
-    resetTime,
-    pauseTime
+    setTimer,
+    resetTimer,
+    pauseTimer
 } from './reducer.js';
 
 
 it('should set the time', () =>{
     const result = reducer({
         time: 5
-    }, setTime({
+    }, setTimer({
         time: 2
     }));
 
@@ -18,23 +18,23 @@ it('should set the time', () =>{
 it('should reset the time', () =>{
     const result = reducer({
         time: 5
-    }, resetTime());
+    }, resetTimer());
 
     expect(result).toMatchSnapshot();
 });
 
 it('should pause the timer', () => {
-   const result = reducer({
-       running: false
-   }, pauseTime());
+    const result = reducer({
+        running: false
+    }, pauseTimer());
 
-   expect(result).toMatchSnapshot();
-})
+    expect(result).toMatchSnapshot();
+});
 
 it('should resume the timer', () => {
-   const result = reducer({
-       running: false
-   }, pauseTime());
+    const result = reducer({
+        running: false
+    }, pauseTimer());
 
-   expect(result).toMatchSnapshot();
-})
+    expect(result).toMatchSnapshot();
+});

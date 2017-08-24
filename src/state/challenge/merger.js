@@ -2,7 +2,7 @@
  * Merges overlapping challenges in list
  * @param  {Array} list array of objects { time, duration }
  */
-export const mergeChallenges = (list) => {
+export const mergeOverlapping = (list) => {
     let li = 0;
     let ri = li + 1;
     let protect = 0;
@@ -27,4 +27,4 @@ export const mergeChallenges = (list) => {
     }
 
     return merged;
-}
+};

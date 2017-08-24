@@ -1,3 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should initialize the store 1`] = `[Function]`;
+exports[`should initialize the store 1`] = `
+Object {
+  "challenge": Object {
+    "list": Array [],
+  },
+  "timer": Object {
+    "running": true,
+    "time": 0,
+  },
+}
+`;

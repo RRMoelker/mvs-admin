@@ -1,30 +1,30 @@
 import { createAction } from 'redux-actions';
 
-export const TIME_SET = 'TIME_SET';
-export const setTime = createAction(TIME_SET);
-const TIME_RESET = 'TIME_RESET';
-export const resetTime = createAction(TIME_RESET);
-const TIME_PAUSE = 'TIME_PAUSE';
-export const pauseTime = createAction(TIME_PAUSE);
+export const TIMER_SET = 'TIMER_SET';
+export const setTimer = createAction(TIMER_SET);
+const TIMER_RESET = 'TIMER_RESET';
+export const resetTimer = createAction(TIMER_RESET);
+const TIMER_PAUSE = 'TIMER_PAUSE';
+export const pauseTimer = createAction(TIMER_PAUSE);
 
 const initialState = {
     time: 0,
-    running: true
+    running: false
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case TIME_RESET:
+        case TIMER_RESET:
             return {
                 ...state,
                 time: 0,
             }
-        case TIME_SET:
+        case TIMER_SET:
             return {
                 ...state,
                 time: action.payload.time,
             }
-        case TIME_PAUSE:
+        case TIMER_PAUSE:
             return {
                 ...state,
                 running: !state.running
