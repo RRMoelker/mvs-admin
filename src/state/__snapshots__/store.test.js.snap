@@ -6,7 +6,7 @@ Object {
     "list": Array [],
   },
   "timer": Object {
-    "running": true,
+    "running": false,
     "time": 0,
   },
 }
