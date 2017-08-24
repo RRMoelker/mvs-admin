@@ -17,4 +17,4 @@ script:
 - ssh-add deploy-key
 - git config user.name "Automatic Publish"
 - git config user.email "RRMoelker@users.noreply.github.com"
-- if [ "${TRAVIS_PULL_REQUEST}" = "true" ]; then echo "Pushing to github"; node ./scripts/deploy-gh-pages.js; fi;
+- if [ "${TRAVIS_PULL_REQUEST}" = "true" ]; then echo "Pushing to github"; NODE_DEBUG=gh-pages npm run deploy; fi;
