@@ -22,6 +22,7 @@
   "homepage": "https://github.com/RRMoelker/mvs-admin#readme",
   "dependencies": {
     "@webcomponents/webcomponentsjs": "1.0.5",
+    "d3": "4.10.2",
     "moment": "2.18.1",
     "redux": "3.7.2",
     "redux-actions": "2.2.1"

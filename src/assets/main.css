@@ -21,6 +21,31 @@ table th, table td {
     float: left;
     width: 50%;
 }
+
+@-webkit-keyframes flashRed {
+  0%, 100%   { color: inherit; }
+  50% { color: red; }
+}
+
+@-webkit-keyframes fadeOut {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.enter {
+    color: green;
+}
+
+.c-challenges__challenge--enter {
+  -webkit-animation: flashRed 1s; /* Safari 4+ */
+  animation:         flashRed 1s; /* IE 10+, Fx 29+ */
+}
+.c-challenges__challenge--exit {
+  -webkit-animation: fadeOut 1s; /* Safari 4+ */
+  animation:         fadeOut 1s; /* IE 10+, Fx 29+ */
+  animation-fill-mode: forwards;
+}
+
 .c-challenges__challenge--almost {
     color: green;
 }
