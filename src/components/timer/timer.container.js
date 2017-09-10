@@ -1,5 +1,6 @@
 import moment from 'moment';
 
+import { TIMER_INTERVAL } from '../../constants.js';
 import {
     setTimer,
     resetTimer,
@@ -8,12 +9,12 @@ import {
 
 import TimerComponent from './timer.component.js';
 
-let interval;
+
 let elapsed = 0;
 let lastNow;
 const startInterval = (store) => {
     lastNow = moment();
-    interval = setInterval(() => {
+    setInterval(() => {
         if(!store.getState().timer.running) {
             lastNow = moment();
             return;
@@ -23,11 +24,7 @@ const startInterval = (store) => {
         store.dispatch(setTimer(elapsed));
 
         lastNow = now;
-
-        if (elapsed > 60 * 1000) {
-            clearInterval(interval);
-        }
-    }, 200);
+    }, TIMER_INTERVAL);
 };
 
 class TimerContainer extends HTMLElement {
