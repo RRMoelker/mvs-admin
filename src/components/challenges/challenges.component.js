@@ -4,7 +4,6 @@ import { ALMOST_THRESHOLD } from '../../constants.js';
 import * as d3 from 'd3';
 
 const ownerDocument = document.currentScript.ownerDocument;
-const rowTemplate = ownerDocument.querySelector('#row');
 
 class ChallengesComponent extends HTMLElement {
     constructor () {
@@ -26,9 +25,6 @@ class ChallengesComponent extends HTMLElement {
     }
 
     connectedCallback () {
-        // Called when the element is inserted into a document, including into a shadow tree
-        console.log(this.constructor.name, 'connected');
-
         this.container = d3.select('.js-container');
     }
 
@@ -54,53 +50,39 @@ class ChallengesComponent extends HTMLElement {
             table.push([key, formatTime(value.remaining), formatTime(value.until)]);
         }
 
-
         // DATA JOIN
-        // Join new data with old elements, if any.
-        const join = this.container
+        const rowsJoin = this.container
             .selectAll('tr')
                 .data(table, d => d[0]);
 
         // UPDATE
-        // Update old elements as needed.
 
         // ENTER
-        // Create new elements as needed.
-        //
-        const d3Enter = join.enter()
+        const rowsEnter = rowsJoin.enter()
             .append('tr')
-            // .style("color", "green") // make the body green
-            // .transition(t).style("opacity", 0);
             .attr('class', 'c-challenges__challenge--enter');
 
         // ENTER + UPDATE
-        // After merging the entered elements with the update selection,
-        // apply operations to both.
-        const innerJoin = d3Enter.merge(join)
+        const rowJoin = rowsEnter.merge(rowsJoin)
             .selectAll('td')
                 .data(r => r);
 
-        const d3InnerEnter =
-            innerJoin.enter()
+        const rowEnter =
+            rowJoin.enter()
                 .append('td')
                     .text(d => d)
                     .classed('enter', true);
 
-        d3InnerEnter.merge(innerJoin)
+        rowEnter.merge(rowJoin)
             .classed('enter', false)
             .text(d => d);
 
         // EXIT
-        // Remove old elements as needed.
-        const exit = join.exit();
-
         const exitTime = 1000; // 1s
-        join.exit()
+        rowsJoin.exit()
             .attr('class', 'c-challenges__challenge--exit')
             .transition().delay( exitTime )
             .remove();
-        // console.log('exit: ', exit.size());
-
     }
 }
 
