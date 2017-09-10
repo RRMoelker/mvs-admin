@@ -31,11 +31,15 @@ table th, table td {
   0%   { opacity: 1; }
   100% { opacity: 0; }
 }
-
-.enter {
+.c-challenges__challenge {
+    transition: color 1s;
+}
+.c-challenges__challenge--almost {
     color: green;
 }
-
+.c-challenges__added {
+    color: red;
+}
 .c-challenges__challenge--enter {
   -webkit-animation: flashRed 1s; /* Safari 4+ */
   animation:         flashRed 1s; /* IE 10+, Fx 29+ */
@@ -46,12 +50,7 @@ table th, table td {
   animation-fill-mode: forwards;
 }
 
-.c-challenges__challenge--almost {
-    color: green;
-}
-.c-challenges__challenge--added {
-    color: red;
-}
+
 .c-button {
     display: inline-block;
     padding: .2rem 0.5rem;

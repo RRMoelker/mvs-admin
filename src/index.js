@@ -7,7 +7,7 @@ import {
     addChallenge
 } from './state/challenge/reducer.js';
 
-for(let i=0; i < 2; ++i) {
+for(let i=0; i < 1; ++i) {
     store.dispatch(addChallenge({
         name: 'minimap',
         duration: 2 * 60 * 1000

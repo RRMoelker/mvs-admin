@@ -44,11 +44,19 @@ class ChallengesComponent extends HTMLElement {
     }
 
     draw() {
-        const someData = Object.entries(this.params.list);
         const table = [];
-        for( const [ key, value ] of someData ) {
-            table.push([key, formatTime(value.remaining), formatTime(value.until)]);
+        for( const [ key, value ] of Object.entries(this.params.list) ) {
+            const remaining = new String(formatTime(value.remaining));
+            remaining.value = value.remaining;
+            let added = '';
+            if(this.params.recent[key]) {
+                added = '+' + formatTime(this.params.recent[key]);
+            }
+            table.push([key, remaining, formatTime(value.until), added]);
         }
+        // table.sort((a, b) => {
+        //     return a[1].value > b[1].value;
+        // });
 
         // DATA JOIN
         const rowsJoin = this.container
@@ -56,10 +64,13 @@ class ChallengesComponent extends HTMLElement {
                 .data(table, d => d[0]);
 
         // UPDATE
+        rowsJoin
+            .classed('c-challenges__challenge--almost', d => d[1].value < ALMOST_THRESHOLD);
 
         // ENTER
         const rowsEnter = rowsJoin.enter()
             .append('tr')
+            .attr('class', 'c-challenges__challenge')
             .attr('class', 'c-challenges__challenge--enter');
 
         // ENTER + UPDATE
@@ -69,13 +80,15 @@ class ChallengesComponent extends HTMLElement {
 
         const rowEnter =
             rowJoin.enter()
-                .append('td')
-                    .text(d => d)
-                    .classed('enter', true);
+                .append('td');
 
         rowEnter.merge(rowJoin)
-            .classed('enter', false)
-            .text(d => d);
+            .text(d => d)
+            .attr('class', (d, i) => {
+                if(i === 3) {
+                    return 'c-challenges__added';
+                }
+            });
 
         // EXIT
         const exitTime = 1000; // 1s
