@@ -1,6 +1,7 @@
 body {
     background-color: black;
     color: white;
+    margin: 1em;
 }
 input {
     background-color: lightgray;
@@ -71,7 +72,7 @@ table th, table td {
     line-height: 1em;
     border: none;
 }
-.c-button--symbol:hover {
+.c-button--symbol:hover, .c-button--symbol:focus {
     font-weight: bold;
 }
 .c-timer__label {

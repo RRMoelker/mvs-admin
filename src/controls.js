@@ -1,52 +1,42 @@
-export default [
-    {
-        name: 'minimap',
+export default {
+    minimap: {
         label: 'No minimap',
         defaultTime: '2:00'
     },
-    {
-        name: 'health',
+    health: {
         label: 'No health potions',
         defaultTime: '2:00'
     },
-    {
-        name: 'shiftalt',
+    shiftalt: {
         label: 'No shift/alt',
         defaultTime: '2:00'
     },
-    {
-        name: 'keyboard',
+    keyboard: {
         label: 'No keyboard',
         defaultTime: '2:00'
     },
-    {
-        name: 'switch',
+    switch: {
         label: 'Switch hands',
         defaultTime: '2:00'
     },
-    {
-        name: 'oven',
+    oven: {
         label: 'Oven glove',
         defaultTime: '2:00'
     },
-    {
-        name: 'love',
+    love: {
         label: 'Love glove',
         defaultTime: '2:00'
     },
-    {
-        name: 'llama',
+    llama: {
         label: 'Llame mit',
         defaultTime: '2:00'
     },
-    {
-        name: 'goggles',
+    goggles: {
         label: 'Ski goggles',
         defaultTime: '2:00'
     },
-    {
-        name: 'wirt',
+    wirt: {
         label: 'Wirts leg',
         defaultTime: '2:00'
     }
-];
+};
