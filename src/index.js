@@ -1,5 +1,3 @@
-// import '@webcomponents/webcomponentsjs/webcomponents-lite.js'; // polyfill HTML Imports, Custom Elements, not shadow dom
-
 import controls from './controls.js';
 
 import store from './state/store.js';

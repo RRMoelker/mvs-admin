@@ -1,4 +1,5 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 const path = require('path');
 const glob = require('glob');
 
@@ -25,6 +26,7 @@ module.exports = {
         filename: '[name].js'
     },
     plugins: [
+        new webpack.IgnorePlugin(/vertx/),
         new CopyWebpackPlugin([
             {
                 from: path.resolve(SRC_DIR, 'index.html'),
@@ -42,6 +44,10 @@ module.exports = {
             },
             {
                 from: path.resolve(NODE_MODULES, '@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js'),
+                to: BUILD_DIR
+            },
+            {
+                from: path.resolve(NODE_MODULES, '@webcomponents/webcomponentsjs/webcomponents-lite.js'),
                 to: BUILD_DIR
             }
         ])
