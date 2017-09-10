@@ -1,4 +1,4 @@
-import controls from './controls.js';
+import { CHALLENGES } from './constants.js';
 
 import store from './state/store.js';
 import {
@@ -13,7 +13,7 @@ for(let i=0; i < 1; ++i) {
 }
 
 document.querySelector('mvs-controls-container').setStore(store);
-document.querySelector('mvs-controls-container').setAttribute('config', JSON.stringify(controls));
+document.querySelector('mvs-controls-container').setAttribute('config', JSON.stringify(CHALLENGES));
 document.querySelector('mvs-timer-container').setStore(store);
 document.querySelector('mvs-challenges-container').setStore(store);
 document.querySelector('mvs-history-container').setStore(store);

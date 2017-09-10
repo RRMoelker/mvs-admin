@@ -1,6 +1,5 @@
 import { formatTime } from '../../util/format.js';
-import { ALMOST_THRESHOLD } from '../../constants.js';
-import controls from '../../controls.js';
+import { ALMOST_THRESHOLD, CHALLENGES } from '../../constants.js';
 
 import * as d3 from 'd3';
 
@@ -53,7 +52,7 @@ class ChallengesComponent extends HTMLElement {
             if(this.params.recent[key]) {
                 added = '+' + formatTime(this.params.recent[key]);
             }
-            table.push([controls[key].label, remaining, formatTime(value.until), added]);
+            table.push([CHALLENGES[key].label, remaining, formatTime(value.until), added]);
         }
         // table.sort((a, b) => {
         //     return a[1].value > b[1].value;
