@@ -7,7 +7,7 @@ export const formatTime = milliseconds => {
     const hours = time.hours();
     const format = hours > 0
         ? 'H:mm:ss.SS'
-        : 'mm:ss.SS';
+        : 'm:ss.SS';
 
     if (isNegative) {
         return '-' + time.format(format);

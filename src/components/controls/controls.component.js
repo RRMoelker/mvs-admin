@@ -35,10 +35,10 @@ class ControlsComponent extends HTMLElement {
 
     draw() {
         const rowContainerEl = this.querySelector('.js-control-container');
-        for( const control of this.config ) {
+        for( const [key, value] of Object.entries(this.config) ) {
             const row = document.importNode(rowTemplate.content, true);
-            row.querySelector('.js-label').innerHTML = control.label;
-            row.querySelector('.js-add').addEventListener('mousedown', () => this.addChallenge(control.name, DEFAULT_DURATION));
+            row.querySelector('.js-label').innerHTML = value.label;
+            row.querySelector('.js-add').addEventListener('mousedown', () => this.addChallenge(key, DEFAULT_DURATION));
             rowContainerEl.appendChild(row);
         }
     }

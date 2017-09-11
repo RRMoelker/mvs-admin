@@ -1,4 +1,6 @@
 import { formatTime } from '../../util/format.js';
+import { CHALLENGES } from '../../constants.js';
+
 
 const ownerDocument = document.currentScript.ownerDocument;
 
@@ -48,7 +50,7 @@ class HistoryComponent extends HTMLElement {
         const rowEls = [];
         for( const [ , value ] of Object.entries(this.params.list) ) {
             const row = document.importNode(rowTemplate.content, true);
-            row.querySelector('.js-label').innerHTML = value.name;
+            row.querySelector('.js-label').innerHTML = CHALLENGES[value.name].label;
             row.querySelector('.js-time').innerHTML = formatTime(value.time);
             row.querySelector('.js-duration').innerHTML = formatTime(value.duration);
             row.querySelector('.js-removeBtn').addEventListener('mousedown',

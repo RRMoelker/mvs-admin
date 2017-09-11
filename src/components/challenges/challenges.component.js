@@ -1,8 +1,9 @@
 import { formatTime } from '../../util/format.js';
-import { ALMOST_THRESHOLD } from '../../constants.js';
+import { ALMOST_THRESHOLD, CHALLENGES } from '../../constants.js';
+
+import * as d3 from 'd3';
 
 const ownerDocument = document.currentScript.ownerDocument;
-const rowTemplate = ownerDocument.querySelector('#row');
 
 class ChallengesComponent extends HTMLElement {
     constructor () {
@@ -23,6 +24,10 @@ class ChallengesComponent extends HTMLElement {
         ];
     }
 
+    connectedCallback () {
+        this.container = d3.select('.js-container');
+    }
+
     attributeChangedCallback (name, oldValue, newValue) {
         // Called when an attribute is changed, appended, removed,
         // or replaced on the element. Only called for observed attributes.
@@ -39,32 +44,58 @@ class ChallengesComponent extends HTMLElement {
     }
 
     draw() {
-
-        const rowContainerEl = this.querySelector('.js-container');
-
-        while (rowContainerEl.firstChild) {
-            rowContainerEl.removeChild(rowContainerEl.firstChild);
-        }
+        const table = [];
         for( const [ key, value ] of Object.entries(this.params.list) ) {
-            const row = document.importNode(rowTemplate.content, true);
-            row.querySelector('.js-label').innerHTML = key;
-
-            const remainingEl = row.querySelector('.js-remaining');
-            remainingEl.innerHTML = formatTime(value.remaining);
-
-            if ( value.remaining < ALMOST_THRESHOLD) {
-                remainingEl.classList.add('c-challenges__challenge--almost');
+            const remaining = new String(formatTime(value.remaining));
+            remaining.value = value.remaining;
+            let added = '';
+            if(this.params.recent[key]) {
+                added = '+' + formatTime(this.params.recent[key]);
             }
-
-            row.querySelector('.js-until').innerHTML = formatTime(value.until);
-
-            const recent = this.params.recent[key];
-            if (recent) {
-                row.querySelector('.js-added').innerHTML = '+ ' + formatTime(recent);
-            }
-
-            rowContainerEl.appendChild(row);
+            table.push([CHALLENGES[key].label, remaining, formatTime(value.until), added]);
         }
+        // table.sort((a, b) => {
+        //     return a[1].value > b[1].value;
+        // });
+
+        // DATA JOIN
+        const rowsJoin = this.container
+            .selectAll('tr')
+                .data(table, d => d[0]);
+
+        // UPDATE
+        rowsJoin
+            .classed('c-challenges__challenge--almost', d => d[1].value < ALMOST_THRESHOLD);
+
+        // ENTER
+        const rowsEnter = rowsJoin.enter()
+            .append('tr')
+            .attr('class', 'c-challenges__challenge')
+            .attr('class', 'c-challenges__challenge--enter');
+
+        // ENTER + UPDATE
+        const rowJoin = rowsEnter.merge(rowsJoin)
+            .selectAll('td')
+                .data(r => r);
+
+        const rowEnter =
+            rowJoin.enter()
+                .append('td');
+
+        rowEnter.merge(rowJoin)
+            .text(d => d)
+            .attr('class', (d, i) => {
+                if(i === 3) {
+                    return 'c-challenges__added';
+                }
+            });
+
+        // EXIT
+        const exitTime = 1000; // 1s
+        rowsJoin.exit()
+            .attr('class', 'c-challenges__challenge--exit')
+            .transition().delay( exitTime )
+            .remove();
     }
 }
 
