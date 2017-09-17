@@ -1,3 +1,4 @@
+import './styles.scss';
 import { CHALLENGES } from './constants.js';
 
 import store from './state/store.js';
