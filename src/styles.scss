@@ -1,86 +1,114 @@
+$black-transparent: rgba(0, 0, 0, .8);
+$black: #000;
+$darkgray: #a9a9a9;
+$gray: #808080;
+$green: #008000;
+$lightgray: #d3d3d3;
+$red: #f00;
+$white: #fff;
+
 body {
-    background-color: black;
-    color: white;
-    margin: 1em;
+  margin: 1em;
+  background-color: $black;
+  color: $white;
 }
+
 input {
-    background-color: lightgray;
-    border: solid 1px gray;
-    width: 5rem;
-    text-align: center;
+  width: 5rem;
+  border: solid 1px $gray;
+  background-color: $lightgray;
+  text-align: center;
 }
+
 table {
-    width: 100%;
-    text-align: right;
-    table-layout: fixed;
-    text-align: center;
-}
-table th, table td {
+  width: 100%;
+  text-align: center;
+  table-layout: fixed;
+
+  th,
+  td {
     padding: 0 1rem;
+  }
 }
+
 .o-column {
-    float: left;
-    width: 50%;
+  width: 50%;
+  float: left;
 }
 
 @-webkit-keyframes flashRed {
-  0%, 100%   { color: inherit; }
-  50% { color: red; }
+  0%,
+  100% {
+    color: inherit;
+  }
+  50% { color: $red; }
 }
 
 @-webkit-keyframes fadeOut {
   0%   { opacity: 1; }
   100% { opacity: 0; }
 }
+
 .c-challenges__challenge {
-    transition: color 1s;
+  transition: color 1s;
 }
+
 .c-challenges__challenge--almost {
-    color: green;
+  color: $green;
 }
+
 .c-challenges__added {
-    color: red;
+  color: $red;
 }
+
 .c-challenges__challenge--enter {
   -webkit-animation: flashRed 1s; /* Safari 4+ */
-  animation:         flashRed 1s; /* IE 10+, Fx 29+ */
+  animation:     flashRed 1s; /* IE 10+, Fx 29+ */
 }
+
 .c-challenges__challenge--exit {
   -webkit-animation: fadeOut 1s; /* Safari 4+ */
-  animation:         fadeOut 1s; /* IE 10+, Fx 29+ */
+  animation:     fadeOut 1s; /* IE 10+, Fx 29+ */
   animation-fill-mode: forwards;
 }
 
 .c-button {
-    display: inline-block;
-    padding: .2rem 0.5rem;
-    color: rgba(0,0,0,.8);
-    border: none;
-    background-color: lightgray;
-    text-decoration: none;
-    border-radius: 2px;
-    min-width: 3rem;
+  display: inline-block;
+  min-width: 3rem;
+  padding: .2rem .5rem;
+  border: none;
+  border-radius: 2px;
+  background-color: $lightgray;
+  color: $black-transparent;
+  text-decoration: none;
+
+  :hover,
+  :focus {
+    background-color: $darkgray;
+  }
 }
-.c-button:hover, .c-button:focus {
-    background-color: darkgray;
-}
+
 .c-button--symbol {
-    background-color: transparent;
-    color: red;
-    font-size: 1em;
-    line-height: 1em;
-    border: none;
-}
-.c-button--symbol:hover, .c-button--symbol:focus {
+  border: none;
+  background-color: transparent;
+  color: $red;
+  font-size: 1em;
+  line-height: 1em;
+
+  :hover,
+  :focus {
     font-weight: bold;
+  }
 }
+
 .c-timer__label {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
+
 .c-timer__time {
-    margin-right: 2rem;
+  margin-right: 2rem;
 }
 
 .u-clear {
-    clear: both;
+  clear: both;
 }
