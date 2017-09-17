@@ -1,9 +1,19 @@
-import { combineReducers, createStore, compose } from 'redux';
+import { reduxSwarmLogMiddleware } from '@philholden/redux-swarmlog';
+import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import { createAction } from 'redux-actions';
 import moment from 'moment';
 
 import challengeReducer from './challenge/reducer';
 import timerReducer, { TIMER_SET } from './timer/reducer';
+
+import keys from '../keys.json';
+import { addReduxSwarmLog, configureReduxSwarmLog } from '@philholden/redux-swarmlog';
+
+addReduxSwarmLog({
+    name: 'mvs-admin',
+    keys
+});
+
 
 const combined = combineReducers({
     timer: timerReducer,
@@ -30,12 +40,14 @@ const rootReducer = (state, action) => {
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const enhancer = composeEnhancers();
+const enhancer = composeEnhancers(
+    applyMiddleware(
+        reduxSwarmLogMiddleware
+    )
+);
 const initialState = {};
 const store = createStore(rootReducer, initialState, enhancer);
 
-// Development logging
-// console.log('initial: ', store.getState());
-// store.subscribe(() => console.log(store.getState()));
+configureReduxSwarmLog({ reduxStore: store });
 
 export default store;

@@ -1,5 +1,7 @@
 import { createAction } from 'redux-actions';
 
+import { reduxSwarmLogId } from '../actions.js';
+
 import { mergeOverlapping } from './merger.js';
 import {
     calculateActive,
@@ -10,10 +12,20 @@ import {
 } from './compute.js';
 
 const CHALLENGE_ADD = 'CHALLENGE_ADD';
-export const addChallenge = createAction(CHALLENGE_ADD);
+// export const addChallenge = createAction(CHALLENGE_ADD);
+export const addChallenge = payload => ({
+    type: CHALLENGE_ADD,
+    payload,
+    reduxSwarmLogId
+});
 
 const CHALLENGE_REMOVE = 'CHALLENGE_REMOVE';
-export const removeChallenge = createAction(CHALLENGE_REMOVE);
+// export const removeChallenge = createAction(CHALLENGE_REMOVE);
+export const removeChallenge = payload => ({
+    type: CHALLENGE_REMOVE,
+    payload,
+    reduxSwarmLogId
+});
 
 const initialState = {
     list: [],

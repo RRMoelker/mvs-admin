@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack -p",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --progress",
     "test": "jest --watch",
     "test-once": "jest",
     "deploy": "gh-pages -d dist --repo git@github.com:RRMoelker/mvs-admin.git"
@@ -21,11 +21,14 @@
   },
   "homepage": "https://github.com/RRMoelker/mvs-admin#readme",
   "dependencies": {
+    "@philholden/redux-swarmlog": "0.2.0",
     "@webcomponents/webcomponentsjs": "1.0.5",
     "d3": "4.10.2",
+    "json-loader": "0.5.7",
     "moment": "2.18.1",
     "redux": "3.7.2",
-    "redux-actions": "2.2.1"
+    "redux-actions": "2.2.1",
+    "ssb-keys": "7.0.10"
   },
   "devDependencies": {
     "autoprefixer": "7.1.4",

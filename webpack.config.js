@@ -81,10 +81,14 @@ module.exports = {
                 }, {
                     loader: 'sass-loader' // compiles Sass to CSS
                 }]
+            },
+            {
+                test: /\.json$/,
+                loader: require.resolve('json-loader')
             }
         ]
     },
-    devtool: 'source-map-eval',
+    devtool: 'eval-source-map',
     devServer: {
         port: 8080
     }
