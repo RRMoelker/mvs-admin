@@ -36,7 +36,7 @@ table {
   float: left;
 }
 
-@-webkit-keyframes flashRed {
+@keyframes flashRed {
   0%,
   100% {
     color: inherit;
@@ -44,7 +44,7 @@ table {
   50% { color: $red; }
 }
 
-@-webkit-keyframes fadeOut {
+@keyframes fadeOut {
   0%   { opacity: 1; }
   100% { opacity: 0; }
 }
@@ -62,13 +62,11 @@ table {
 }
 
 .c-challenges__challenge--enter {
-  -webkit-animation: flashRed 1s; /* Safari 4+ */
-  animation:     flashRed 1s; /* IE 10+, Fx 29+ */
+  animation:     flashRed 1s;
 }
 
 .c-challenges__challenge--exit {
-  -webkit-animation: fadeOut 1s; /* Safari 4+ */
-  animation:     fadeOut 1s; /* IE 10+, Fx 29+ */
+  animation:     fadeOut 1s;
   animation-fill-mode: forwards;
 }
 
