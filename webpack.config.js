@@ -1,7 +1,8 @@
+const autoprefixer = require('autoprefixer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack');
-const path = require('path');
 const glob = require('glob');
+const path = require('path');
+const webpack = require('webpack');
 
 const PROJECT_DIR = __dirname;
 const SRC_DIR = path.resolve(PROJECT_DIR, 'src');
@@ -63,6 +64,23 @@ module.exports = {
                         presets: ['env']
                     }
                 }
+            },
+            {
+                test: /\.scss$/,
+                use: [{
+                    loader: 'style-loader' // creates style nodes from JS strings
+                }, {
+                    loader: 'css-loader' // translates CSS into CommonJS
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: function () {
+                            return [autoprefixer];
+                        }
+                    }
+                }, {
+                    loader: 'sass-loader' // compiles Sass to CSS
+                }]
             }
         ]
     },

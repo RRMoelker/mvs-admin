@@ -1,0 +1,112 @@
+$black-transparent: rgba(0, 0, 0, .8);
+$black: #000;
+$darkgray: #a9a9a9;
+$gray: #808080;
+$green: #008000;
+$lightgray: #d3d3d3;
+$red: #f00;
+$white: #fff;
+
+body {
+  margin: 1em;
+  background-color: $black;
+  color: $white;
+}
+
+input {
+  width: 5rem;
+  border: solid 1px $gray;
+  background-color: $lightgray;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  table-layout: fixed;
+
+  th,
+  td {
+    padding: 0 1rem;
+  }
+}
+
+.o-column {
+  width: 50%;
+  float: left;
+}
+
+@keyframes flashRed {
+  0%,
+  100% {
+    color: inherit;
+  }
+  50% { color: $red; }
+}
+
+@keyframes fadeOut {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.c-challenges__challenge {
+  transition: color 1s;
+}
+
+.c-challenges__challenge--almost {
+  color: $green;
+}
+
+.c-challenges__added {
+  color: $red;
+}
+
+.c-challenges__challenge--enter {
+  animation:     flashRed 1s;
+}
+
+.c-challenges__challenge--exit {
+  animation:     fadeOut 1s;
+  animation-fill-mode: forwards;
+}
+
+.c-button {
+  display: inline-block;
+  min-width: 3rem;
+  padding: .2rem .5rem;
+  border: none;
+  border-radius: 2px;
+  background-color: $lightgray;
+  color: $black-transparent;
+  text-decoration: none;
+
+  :hover,
+  :focus {
+    background-color: $darkgray;
+  }
+}
+
+.c-button--symbol {
+  border: none;
+  background-color: transparent;
+  color: $red;
+  font-size: 1em;
+  line-height: 1em;
+
+  :hover,
+  :focus {
+    font-weight: bold;
+  }
+}
+
+.c-timer__label {
+  margin-right: 1rem;
+}
+
+.c-timer__time {
+  margin-right: 2rem;
+}
+
+.u-clear {
+  clear: both;
+}
