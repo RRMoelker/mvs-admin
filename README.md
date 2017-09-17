@@ -4,6 +4,11 @@ Work in progress!
 
 App: https://rrmoelker.github.io/mvs-admin/
 
+## Note
+
+Requires custom version of swarmlog without uglify step.
+NPM package seems corrupted (Object.decode error).
+
 ## Install
 
 ```
