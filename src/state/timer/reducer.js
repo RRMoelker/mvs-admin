@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
         case TIMER_SET:
             return {
                 ...state,
-                time: action.payload.time,
+                time: action.payload,
             }
         case TIMER_PAUSE:
             return {

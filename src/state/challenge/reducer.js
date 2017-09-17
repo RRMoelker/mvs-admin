@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 
-import { reduxSwarmLogId } from '../actions.js';
+// import { reduxSwarmLogId } from '../actions.js';
 
 import { mergeOverlapping } from './merger.js';
 import {
@@ -16,7 +16,7 @@ const CHALLENGE_ADD = 'CHALLENGE_ADD';
 export const addChallenge = payload => ({
     type: CHALLENGE_ADD,
     payload,
-    reduxSwarmLogId
+    // reduxSwarmLogId
 });
 
 const CHALLENGE_REMOVE = 'CHALLENGE_REMOVE';
@@ -24,7 +24,7 @@ const CHALLENGE_REMOVE = 'CHALLENGE_REMOVE';
 export const removeChallenge = payload => ({
     type: CHALLENGE_REMOVE,
     payload,
-    reduxSwarmLogId
+    // reduxSwarmLogId
 });
 
 const initialState = {
@@ -63,7 +63,8 @@ let uuid = 0; // TODO: use uuid
 export default (state = initialState, action) => {
     switch (action.type) {
         case CHALLENGE_ADD:
-            const { name, duration, time } = action.payload;
+            const { name, duration } = action.payload;
+            const { time } = action.meta;
 
             const list = [ ...state.list, {
                 uuid,
