@@ -66,17 +66,21 @@ export default (state = initialState, action) => {
             const { name, duration } = action.payload;
             const { time } = action.meta;
 
-            const list = [ ...state.list, {
+            const newChallenge = {
                 uuid,
                 name,
                 duration,
                 time,
-            }];
+            };
             uuid++;
+            const list = [ ...state.list, newChallenge];
+            list.sort((a,b) => {
+                return a.time > b.time;
+            });
 
             return {
                 ...state,
-                list: list,
+                list,
             }
         case CHALLENGE_REMOVE:
             const filteredList = state.list.filter( item => item.uuid !== action.payload.uuid);

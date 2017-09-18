@@ -28,9 +28,26 @@ describe('the challenge reducer', () => {
 
         expect(result).toMatchSnapshot();
     });
-});
 
-describe('the challenge reducer', () => {
+    it('should add challenges ordered by time', () =>{
+        const action = addChallenge({
+            name: 'minimap',
+            duration: 1000
+        });
+        action.meta = { time: 1 };
+        const actionB = addChallenge({
+            name: 'glove',
+            duration: 2000
+        });
+        actionB.meta = { time: 0 };
+
+        const stepState = reducer(undefined, action);
+        const result = reducer(stepState, actionB);
+
+        expect(result.list[0].name).toEqual('glove');
+        expect(result.list[1].name).toEqual('minimap');
+    });
+
     it('should remove elements from the list', () =>{
         const action = addChallenge({
             name: 'minimap',
