@@ -12,14 +12,19 @@ describe('the challenge reducer', () => {
     });
 
     it('should push new challenges to the list', () =>{
-        const stepState = reducer(undefined, addChallenge({
+        const action = addChallenge({
             name: 'minimap',
             duration: 1000
-        }));
-        const result = reducer(stepState, addChallenge({
+        });
+        action.meta = { time: 0 };
+        const actionB = addChallenge({
             name: 'glove',
             duration: 2000
-        }));
+        });
+        actionB.meta = { time: 1 };
+
+        const stepState = reducer(undefined, action);
+        const result = reducer(stepState, actionB);
 
         expect(result).toMatchSnapshot();
     });
@@ -27,10 +32,12 @@ describe('the challenge reducer', () => {
 
 describe('the challenge reducer', () => {
     it('should remove elements from the list', () =>{
-        const stepState = reducer(undefined, addChallenge({
+        const action = addChallenge({
             name: 'minimap',
             duration: 1000
-        }));
+        });
+        action.meta = { time: 0 };
+        const stepState = reducer(undefined, action);
 
         const result = reducer(stepState, removeChallenge({ uuid: stepState.list[0].uuid}));
 
@@ -41,11 +48,12 @@ describe('the challenge reducer', () => {
 
 describe('select remaining challenges', () => {
     it('should calculate a single challenge', () =>{
-        const state = reducer(undefined, addChallenge({
+        const action = addChallenge({
             name: 'glove',
-            duration: 10,
-            time: 1
-        }));
+            duration: 10
+        });
+        action.meta = { time: 1 };
+        const state = reducer(undefined, action);
 
         const list = state.list;
         const result = selectRemaining(list, 3);
@@ -59,16 +67,19 @@ describe('select remaining challenges', () => {
     });
 
     it('should handle two challenges', () => {
-        const stateA = reducer(undefined, addChallenge({
+        const action = addChallenge({
             name: 'glove',
-            duration: 10,
-            time: 5
-        }));
-        const stateB = reducer(stateA, addChallenge({
+            duration: 10
+        });
+        action.meta = { time: 5 };
+        const actionB = addChallenge({
             name: 'glove',
-            duration: 10,
-            time: 20
-        }));
+            duration: 10
+        });
+        actionB.meta = { time: 20 };
+
+        const stateA = reducer(undefined, action);
+        const stateB = reducer(stateA, actionB);
 
         const list = stateB.list;
         const result = selectRemaining(list, 25);
@@ -82,16 +93,18 @@ describe('select remaining challenges', () => {
     });
 
     it('should handle overlapping challenges', () => {
-        const stateA = reducer(undefined, addChallenge({
+        const action = addChallenge({
             name: 'glove',
-            duration: 10,
-            time: 5
-        }));
-        const stateB = reducer(stateA, addChallenge({
+            duration: 10
+        });
+        action.meta = { time: 5 };
+        const actionB = addChallenge({
             name: 'glove',
-            duration: 10,
-            time: 10
-        }));
+            duration: 10
+        });
+        actionB.meta = { time: 10 };
+        const stateA = reducer(undefined, action);
+        const stateB = reducer(stateA, actionB);
 
         const list = stateB.list;
         const result = selectRemaining(list, 12);
@@ -105,21 +118,24 @@ describe('select remaining challenges', () => {
     });
 
     it('should be empty if all challenges have passed', () => {
-        const stateA = reducer(undefined, addChallenge({
+        const action = addChallenge({
             name: 'glove',
-            duration: 10,
-            time: 0
-        }));
-        const stateB = reducer(stateA, addChallenge({
+            duration: 10
+        });
+        action.meta = { time: 0 };
+        const actionB = addChallenge({
             name: 'glove',
-            duration: 10,
-            time: 20
-        }));
-        const stateC = reducer(stateB, addChallenge({
+            duration: 10
+        });
+        actionB.meta = { time: 20 };
+        const actionC = addChallenge({
             name: 'glove',
-            duration: 10,
-            time: 40
-        }));
+            duration: 10
+        });
+        actionC.meta = { time: 40 };
+        const stateA = reducer(undefined, action);
+        const stateB = reducer(stateA, actionB);
+        const stateC = reducer(stateB, actionC);
 
         const list = stateC.list;
         const result = selectRemaining(list, 51);
@@ -128,21 +144,24 @@ describe('select remaining challenges', () => {
     });
 
     it('should support mixed challenges', () => {
-        const stateA = reducer(undefined, addChallenge({
+        const action = addChallenge({
             name: 'glove',
-            duration: 10,
-            time: 0
-        }));
-        const stateB = reducer(stateA, addChallenge({
+            duration: 10
+        });
+        action.meta = { time: 0 };
+        const actionB = addChallenge({
             name: 'map',
-            duration: 10,
-            time: 15
-        }));
-        const stateC = reducer(stateB, addChallenge({
+            duration: 10
+        });
+        actionB.meta = { time: 15 };
+        const actionC = addChallenge({
             name: 'health',
-            duration: 10,
-            time: 18
-        }));
+            duration: 10
+        });
+        actionC.meta = { time: 18 };
+        const stateA = reducer(undefined, action);
+        const stateB = reducer(stateA, actionB);
+        const stateC = reducer(stateB, actionC);
 
         const list = stateC.list;
         const result = selectRemaining(list, 19);

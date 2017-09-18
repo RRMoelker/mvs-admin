@@ -6,13 +6,13 @@ Object {
     Object {
       "duration": 1000,
       "name": "minimap",
-      "time": undefined,
+      "time": 0,
       "uuid": 0,
     },
     Object {
       "duration": 2000,
       "name": "glove",
-      "time": undefined,
+      "time": 1,
       "uuid": 1,
     },
   ],

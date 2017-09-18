@@ -8,9 +8,7 @@ import reducer, {
 it('should set the time', () =>{
     const result = reducer({
         time: 5
-    }, setTimer({
-        time: 2
-    }));
+    }, setTimer(2));
 
     expect(result).toMatchSnapshot();
 });
