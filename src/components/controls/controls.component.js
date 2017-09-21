@@ -1,8 +1,6 @@
 const ownerDocument = document.currentScript.ownerDocument;
 const rowTemplate = ownerDocument.querySelector('#single-control');
 
-const DEFAULT_DURATION = 2 * 60 * 1000;
-
 class ControlsComponent extends HTMLElement {
     constructor () {
         super();
@@ -38,7 +36,15 @@ class ControlsComponent extends HTMLElement {
         for( const [key, value] of Object.entries(this.config) ) {
             const row = document.importNode(rowTemplate.content, true);
             row.querySelector('.js-label').innerHTML = value.label;
-            row.querySelector('.js-add').addEventListener('mousedown', () => this.addChallenge(key, DEFAULT_DURATION));
+            const timeInput = row.querySelector('.js-time');
+            row.querySelector('.js-add').addEventListener('mousedown', () => {
+                if(isNaN(timeInput.valueAsNumber)) {
+                    alert('invalid time');
+                } else {
+                    return this.addChallenge(key, timeInput.valueAsNumber);
+                }
+
+            });
             rowContainerEl.appendChild(row);
         }
     }

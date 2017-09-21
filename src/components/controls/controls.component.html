@@ -4,8 +4,9 @@
         <td><input
             class="js-time"
             type="time"
-            disabled
-            value='02:00'/></input></td></td>
+            step="5"
+            required
+            value='00:02:00'/></input></td></td>
         <td><button class="js-add c-button">Add</button></td>
     </tr>
 </template>
@@ -15,7 +16,7 @@
       <thead>
           <tr>
               <th></th>
-              <th>Duration</th>
+              <th>Duration (hh:mm:ss)</th>
               <th></th>
           </tr>
       </thead>

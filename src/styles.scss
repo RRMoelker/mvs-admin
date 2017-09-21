@@ -14,7 +14,7 @@ body {
 }
 
 input {
-  width: 5rem;
+  width: 7rem;
   border: solid 1px $gray;
   background-color: $lightgray;
   text-align: center;
@@ -80,8 +80,8 @@ table {
   color: $black-transparent;
   text-decoration: none;
 
-  :hover,
-  :focus {
+  &:hover,
+  &:focus {
     background-color: $darkgray;
   }
 }
@@ -93,8 +93,8 @@ table {
   font-size: 1em;
   line-height: 1em;
 
-  :hover,
-  :focus {
+  &:hover,
+  &:focus {
     font-weight: bold;
   }
 }

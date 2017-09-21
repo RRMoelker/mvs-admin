@@ -2,6 +2,8 @@ import { createAction } from 'redux-actions';
 
 // import { reduxSwarmLogId } from '../actions.js';
 
+import { v4 } from 'uuid';
+
 import { mergeOverlapping } from './merger.js';
 import {
     calculateActive,
@@ -58,8 +60,6 @@ export const selectRecent = (list, now, threshold) => {
     return result;
 }
 
-let uuid = 0; // TODO: use uuid
-
 export default (state = initialState, action) => {
     switch (action.type) {
         case CHALLENGE_ADD:
@@ -67,12 +67,11 @@ export default (state = initialState, action) => {
             const { time } = action.meta;
 
             const newChallenge = {
-                uuid,
+                uuid: v4(),
                 name,
                 duration,
                 time,
             };
-            uuid++;
             const list = [ ...state.list, newChallenge];
             list.sort((a,b) => {
                 return a.time > b.time;

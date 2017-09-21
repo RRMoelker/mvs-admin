@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the challenge reducer should push new challenges to the list 1`] = `
+exports[`the challenge reducer the challenge reducer should push new challenges to the list 1`] = `
 Object {
   "list": Array [
     Object {
@@ -19,13 +19,13 @@ Object {
 }
 `;
 
-exports[`the challenge reducer should remove elements from the list 1`] = `
+exports[`the challenge reducer the challenge reducer should remove elements from the list 1`] = `
 Object {
   "list": Array [],
 }
 `;
 
-exports[`the challenge reducer should start with an empty list 1`] = `
+exports[`the challenge reducer the challenge reducer should start with an empty list 1`] = `
 Object {
   "list": Array [],
 }
