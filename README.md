@@ -25,6 +25,9 @@ npm run build
 
 The site is served through gh-pages.
 
+### Signalling
+
+Using signalhub server hosted. For easy setup use "Deploy to Heroku" button on https://github.com/mafintosh/signalhub.
 
 ## Development
 

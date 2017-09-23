@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 
-// import { reduxSwarmLogId } from '../actions.js';
+import { reduxSwarmLogId } from '../actions.js';
 
 import { v4 } from 'uuid';
 
@@ -18,7 +18,10 @@ const CHALLENGE_ADD = 'CHALLENGE_ADD';
 export const addChallenge = payload => ({
     type: CHALLENGE_ADD,
     payload,
-    // reduxSwarmLogId
+    meta: {
+        uuid: v4()
+    },
+    reduxSwarmLogId
 });
 
 const CHALLENGE_REMOVE = 'CHALLENGE_REMOVE';
@@ -26,7 +29,7 @@ const CHALLENGE_REMOVE = 'CHALLENGE_REMOVE';
 export const removeChallenge = payload => ({
     type: CHALLENGE_REMOVE,
     payload,
-    // reduxSwarmLogId
+    reduxSwarmLogId
 });
 
 const initialState = {
@@ -63,14 +66,13 @@ export const selectRecent = (list, now, threshold) => {
 export default (state = initialState, action) => {
     switch (action.type) {
         case CHALLENGE_ADD:
-            const { name, duration } = action.payload;
-            const { time } = action.meta;
+            const { uuid, time } = action.meta;
+            console.log('uuid: ', uuid);
 
             const newChallenge = {
-                uuid: v4(),
-                name,
-                duration,
-                time,
+                ...action.payload,
+                uuid,
+                time
             };
             const list = [ ...state.list, newChallenge];
             list.sort((a,b) => {
