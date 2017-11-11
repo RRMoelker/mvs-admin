@@ -1,5 +1,7 @@
 # mvs-admin
 
+[![Build Status](https://travis-ci.org/RRMoelker/mvs-admin.svg?branch=master)](https://travis-ci.org/RRMoelker/mvs-admin)
+
 Work in progress!
 
 App: https://rrmoelker.github.io/mvs-admin/
