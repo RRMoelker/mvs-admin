@@ -6,9 +6,9 @@ set -e # Exit with nonzero exit code if anything fails
 SOURCE_BRANCH="master"
 TARGET_BRANCH="gh-pages"
 
-echo "Running tests"
+# echo "Running tests"
 
-npm run test-once
+# npm run test-once
 
 echo "Running build"
 npm run build
