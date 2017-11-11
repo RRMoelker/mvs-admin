@@ -34,10 +34,6 @@ module.exports = {
                 to: BUILD_DIR
             },
             {
-                from: path.resolve(SRC_DIR, 'assets'),
-                to: path.resolve(BUILD_DIR, 'assets')
-            },
-            {
                 // Put the component HTML files next to the JS files
                 context: SRC_DIR,
                 from: { glob: SRC_DIR + '/components/**/*.html' },
